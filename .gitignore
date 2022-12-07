@@ -1,0 +1,5 @@
+# if you use webstorm
+.idea
+
+# backend
+/backend/db.sqlite3
