@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Project, Okr, Note, Status, Task, Checklist, Sprint
+from .models import Project, Okr, Note, Task, Checklist, Sprint
 
 class NoteInline(admin.TabularInline):
     model = Note
@@ -14,7 +14,7 @@ class SprintInline(admin.TabularInline):
 class TaskInline(admin.TabularInline):
     model = Task
     fieldsets = [
-        (None, {'fields': ['id', 'title', 'status', 'okr', 'sprint', 'project']}),
+        (None, {'fields': ['id', 'title', 'status', 'okr', 'sprint']}),
     ]
     extra = 0
 
@@ -22,7 +22,7 @@ class TaskInline(admin.TabularInline):
 class OkrInline(admin.TabularInline):
     model = Okr
     fieldsets = [
-        (None, {'fields': ['id', 'title', 'status']}),
+        (None, {'fields': ['id', 'title', 'description', 'status']}),
     ]
     extra = 0
 
@@ -36,7 +36,7 @@ class ProjectAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {'fields': ['title', 'created_at', 'status']}),
     ]
-    inlines = [OkrInline, SprintInline, NoteInline]
+    inlines = [OkrInline, SprintInline, NoteInline, TaskInline]
 
 
 class OkrAdmin(admin.ModelAdmin):
@@ -55,12 +55,12 @@ class TaskAdmin(admin.ModelAdmin):
 
 class SprintAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None, {'fields': ['title', 'created_at', 'project', 'result', 'completed']}),
+        (None, {'fields': ['title', 'created_at', 'project', 'result', 'status']}),
     ]
     inlines = [TaskInline]
 
+
 admin.site.register(Okr, OkrAdmin)
-admin.site.register(Status)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Task, TaskAdmin)
 admin.site.register(Sprint, SprintAdmin)

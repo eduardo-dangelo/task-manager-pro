@@ -2,19 +2,21 @@ from django.db import models
 from django.utils import timezone
 
 # Create your models here.
-class Status(models.Model):
-    title = models.CharField(max_length=120)
-    color_code = models.CharField(max_length=6)
-
-    def __str__(self):
-        return self.title
+STATUS = [
+    ('IN', 'initiated'),
+    ('IP', 'in progress'),
+    ('PK', 'inactive'),
+    ('BK', 'blocked'),
+    ('CP', 'completed'),
+    ('CC', 'canceled'),
+]
 
 
 class Project(models.Model):
     title = models.CharField(max_length=120)
     description = models.TextField(null=True, blank=True)
     created_at = models.DateTimeField('created at', default=timezone.now)
-    status = models.ForeignKey(Status, on_delete=models.PROTECT, default=None)
+    status = models.CharField(max_length=2, choices=STATUS, default="IN")
 
     def __str__(self):
         return self.title
@@ -25,7 +27,7 @@ class Okr(models.Model):
     description = models.TextField(null=True, blank=True)
     created_at = models.DateTimeField('created at', default=timezone.now)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    status = models.ForeignKey(Status, on_delete=models.PROTECT, default=None)
+    status =  models.CharField(max_length=2, choices=STATUS, default="IN")
 
     def __str__(self):
         return self.title
@@ -36,7 +38,7 @@ class Sprint(models.Model):
     created_at = models.DateTimeField('created at', default=timezone.now)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     result = models.TextField(null=True, blank=True)
-    completed = models.BooleanField(default=False)
+    status =  models.CharField(max_length=2, choices=STATUS, default="IN")
 
     def __str__(self):
         return self.title
@@ -48,7 +50,7 @@ class Task(models.Model):
     description = models.TextField(null=True, blank=True)
     okr = models.ForeignKey(Okr, on_delete=models.CASCADE)
     sprint = models.ForeignKey(Sprint, on_delete=models.PROTECT, null=True, blank=True)
-    status = models.ForeignKey(Status, on_delete=models.PROTECT, null=True, blank=True)
+    status =  models.CharField(max_length=2, choices=STATUS, default="IN")
     project = models.ForeignKey(Project, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
