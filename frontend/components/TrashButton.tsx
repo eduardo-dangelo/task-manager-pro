@@ -18,6 +18,7 @@ const TrashButton: React.FC<ComponentType> = ({ onDelete, ...props }) => {
       sx={{ mr: 0.5, ...props?.sx }}
       onClick={onDelete}
       className={props?.className}
+      color='inherit'
     >
       <DeleteIcon fontSize='small' />
     </IconButton>

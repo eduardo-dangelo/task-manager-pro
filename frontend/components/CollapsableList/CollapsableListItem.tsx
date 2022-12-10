@@ -104,6 +104,7 @@ const CollapsableListItem: React.FC<ComponentType> = ({
               edge='end'
               aria-label='edit'
               size='small'
+              color='inherit'
               sx={{ mr: 0.2 }}
               onClick={() => setEditMode(true)}
             >
