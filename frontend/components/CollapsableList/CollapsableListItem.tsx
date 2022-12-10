@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import ListItemIcon from '@mui/material/ListItemIcon'
-import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck'
 import ListItemText from '@mui/material/ListItemText'
 import ListItemButton from '@mui/material/ListItemButton'
 import { Collapse, IconButton } from '@mui/material'
@@ -10,6 +9,7 @@ import TrashButton from '../TrashButton'
 import Link from 'next/link'
 import { ProjectItem } from '../../src/types'
 import theme from '../../src/theme'
+import { useRouter } from 'next/router'
 
 type ComponentType = {
   item: ProjectItem
@@ -26,12 +26,13 @@ const CollapsableListItem: React.FC<ComponentType> = ({
   list = [],
   onUpdate = () => {},
   onDelete = () => {},
-  selected,
+  // selected,
   staticMode,
   onSelect,
   ...props
 }) => {
   const [editMode, setEditMode] = useState(false)
+  const router = useRouter()
 
   const visibleOnHover = {
     '& .hidden-button': {
@@ -54,6 +55,10 @@ const CollapsableListItem: React.FC<ComponentType> = ({
     setEditMode(false)
   }
 
+  const selected = useMemo(() => {
+    return item.route === router.asPath
+  }, [item, router.asPath])
+
   if (editMode && !staticMode) {
     return (
       <Collapse in={editMode}>
@@ -71,11 +76,12 @@ const CollapsableListItem: React.FC<ComponentType> = ({
   }
 
   return (
-    <Link href={`/project/${item.id}`} onClick={() => onSelect(item.id)} {...props}>
+    <Link href={item.route} onClick={() => onSelect(item.id)} {...props}>
       <ListItemButton
         selected={selected}
         sx={{
           py: 1.2,
+          mb: 1,
           paddingRight: '0 !important',
           minHeight: 32,
           borderRadius: 2,

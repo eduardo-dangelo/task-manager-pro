@@ -10,6 +10,8 @@ import { ListItemButton, Typography } from '@mui/material'
 import Link from 'next/link'
 import DashboardIcon from '@mui/icons-material/Dashboard'
 import { ProjectItem } from '../src/types'
+import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined'
+import HouseIcon from '@mui/icons-material/House'
 
 const FireNav = styled(List)({
   '& .MuiListItemButton-root': {
@@ -26,13 +28,38 @@ const FireNav = styled(List)({
 })
 
 const homeLinks: ProjectItem[] = [
-  { id: 1, title: 'Dashboard', icon: <DashboardIcon />, active: true },
+  { id: 1, title: 'Home', icon: <HouseIcon />, active: true, route: '/' },
+  {
+    id: 2,
+    title: 'Dashboard',
+    icon: <DashboardIcon />,
+    active: true,
+    route: '/dashboard',
+  },
 ]
 
 const data: ProjectItem[] = [
-  { id: 1, title: '2023 Year goals', icon: <DashboardIcon />, active: false },
-  { id: 2, title: '2022 Year Goals', icon: <DashboardIcon />, active: false },
-  { id: 3, title: 'Move House', icon: <DashboardIcon />, active: false },
+  {
+    id: 1,
+    title: '2023 Year goals',
+    icon: <DescriptionOutlinedIcon />,
+    active: false,
+    route: '/project/1',
+  },
+  {
+    id: 2,
+    title: '2022 Year Goals',
+    icon: <DescriptionOutlinedIcon />,
+    active: false,
+    route: '/project/2',
+  },
+  {
+    id: 3,
+    title: 'Move House',
+    icon: <DescriptionOutlinedIcon />,
+    active: false,
+    route: '/project/3',
+  },
 ]
 
 const Sidebar = () => {

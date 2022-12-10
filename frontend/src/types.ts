@@ -5,6 +5,7 @@ export type ProjectItem = {
   id: number
   icon?: React.ReactNode
   active?: boolean
+  route: string
 }
 
 export type AddItemScopeTypes = 'create' | 'update'

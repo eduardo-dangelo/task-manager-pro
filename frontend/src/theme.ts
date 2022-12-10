@@ -12,7 +12,7 @@ export const roboto = Roboto({
 // Create a theme instance.
 const theme = createTheme({
   palette: {
-    // mode: 'dark',
+    mode: 'light',
     background: {
       default: '#fafbfb',
       paper: 'rgb(255,255,255)',
