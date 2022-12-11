@@ -7,13 +7,14 @@ import EditIcon from '@mui/icons-material/Edit'
 import AddListItem from './AddListItem'
 import TrashButton from '../TrashButton'
 import Link from 'next/link'
-import { ProjectItem } from '../../src/types'
+import { ListItemType } from '../../src/types'
 import theme from '../../src/theme'
 import { useRouter } from 'next/router'
+import { HeadShake } from '../../src/animations'
 
 type ComponentType = {
-  item: ProjectItem
-  list: ProjectItem[]
+  item: ListItemType
+  list: ListItemType[]
   onUpdate: (value: string) => void
   onDelete: () => void
   staticMode?: boolean
@@ -74,59 +75,61 @@ const CollapsableListItem: React.FC<ComponentType> = ({
 
   return (
     <Link href={item.route} {...props}>
-      <ListItemButton
-        selected={selected}
-        sx={{
-          py: 0.5,
-          mb: 0.5,
-          paddingLeft: '1rem !important',
-          paddingRight: '0 !important',
-          minHeight: 32,
-          borderRadius: 2,
-          background: selected ? `${theme.palette.primary.main} !important` : 'auto',
-          color: selected ? 'white' : 'auto',
-          ...visibleOnHover,
-          '&:hover svg': {
-            color: selected ? 'inherit' : 'primary.main',
-          },
-        }}
-      >
-        <ListItemIcon
+      <HeadShake when={selected}>
+        <ListItemButton
+          selected={selected}
           sx={{
-            color: selected ? 'inherit' : 'primary',
-            paddingLeft: 0,
+            py: 0.5,
+            mb: 0.5,
+            paddingLeft: '1rem !important',
+            paddingRight: '0 !important',
+            minHeight: 32,
+            borderRadius: 2,
+            background: selected ? `${theme.palette.primary.main} !important` : 'auto',
+            color: selected ? 'white' : 'auto',
+            ...visibleOnHover,
+            '&:hover svg': {
+              color: selected ? 'inherit' : 'primary.main',
+            },
           }}
         >
-          {item?.icon}
-        </ListItemIcon>
-        <ListItemText
-          primary={item?.title}
-          primaryTypographyProps={{
-            fontWeight: '100',
-            fontSize: '0.95rem',
-          }}
-        />
-        {!staticMode && (
-          <>
-            <IconButton
-              className='hidden-button'
-              edge='end'
-              aria-label='edit'
-              size='small'
-              color='inherit'
-              sx={{ mr: 0.2, color: selected ? 'inherit' : 'primary.main' }}
-              onClick={() => setEditMode(true)}
-            >
-              <EditIcon fontSize='small' />
-            </IconButton>
-            <TrashButton
-              className='hidden-button'
-              onDelete={onDelete}
-              sx={{ color: selected ? 'inherit' : 'primary.main' }}
-            />
-          </>
-        )}
-      </ListItemButton>
+          <ListItemIcon
+            sx={{
+              color: selected ? 'inherit' : 'primary',
+              paddingLeft: 0,
+            }}
+          >
+            {item?.icon}
+          </ListItemIcon>
+          <ListItemText
+            primary={item?.title}
+            primaryTypographyProps={{
+              fontWeight: '100',
+              fontSize: '0.95rem',
+            }}
+          />
+          {!staticMode && (
+            <>
+              <IconButton
+                className='hidden-button'
+                edge='end'
+                aria-label='edit'
+                size='small'
+                color='inherit'
+                sx={{ mr: 0.2, color: selected ? 'inherit' : 'primary.main' }}
+                onClick={() => setEditMode(true)}
+              >
+                <EditIcon fontSize='small' />
+              </IconButton>
+              <TrashButton
+                className='hidden-button'
+                onDelete={onDelete}
+                sx={{ color: selected ? 'inherit' : 'primary.main' }}
+              />
+            </>
+          )}
+        </ListItemButton>
+      </HeadShake>
     </Link>
   )
 }

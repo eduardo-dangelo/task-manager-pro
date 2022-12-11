@@ -49,7 +49,7 @@ class Task(models.Model):
     created_at = models.DateTimeField('created at', default=timezone.now)
     description = models.TextField(null=True, blank=True)
     okr = models.ForeignKey(Okr, on_delete=models.CASCADE)
-    sprint = models.ForeignKey(Sprint, on_delete=models.PROTECT, null=True, blank=True)
+    sprint = models.ForeignKey(Sprint, on_delete=models.CASCADE, null=True, blank=True)
     status =  models.CharField(max_length=2, choices=STATUS, default="IN")
     project = models.ForeignKey(Project, on_delete=models.CASCADE, null=True, blank=True)
 

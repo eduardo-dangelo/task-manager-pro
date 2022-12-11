@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import { ListItem } from '@mui/material'
 import AddItem from '../AddItem'
-import { AddItemScopeTypes, ProjectItem } from '../../src/types'
+import { AddItemScopeTypes, ListItemType } from '../../src/types'
 
 type ComponentType = {
   onAdd: (value: string) => void
   onCancel: () => void
-  list: ProjectItem[]
+  list: ListItemType[]
   initialValue?: string
   onBlur?: () => void
   scope?: AddItemScopeTypes

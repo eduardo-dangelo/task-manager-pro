@@ -1,11 +1,19 @@
 import React from 'react'
 
-export type ProjectItem = {
+export type ListItemType = {
   title: string
   id: number
   icon?: React.ReactNode
-  active?: boolean
   route: string
+}
+
+export type StatusType = 'IN' | 'IP' | 'PK' | 'BK' | 'CP' | 'CC'
+
+export type ProjectFromApiType = {
+  id: number
+  title: string
+  create_at: React.ReactNode
+  status: StatusType
 }
 
 export type AddItemScopeTypes = 'create' | 'update'

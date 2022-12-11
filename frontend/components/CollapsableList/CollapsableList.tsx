@@ -6,12 +6,11 @@ import { Collapse, ListItem, Typography } from '@mui/material'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
 import { TransitionGroup } from 'react-transition-group'
 import AddListItem from './AddListItem'
-import { ProjectItem } from '../../src/types'
+import { ListItemType, ProjectFromApiType } from '../../src/types'
 import CollapsableListItem from './CollapsableListItem'
 
 const rotate90IconStyle = {
   '& svg': {
-    // color: 'rgba(255,255,255,0.8)',
     transition: '0.2s',
     transform: 'translateX(0) rotate(0)',
   },
@@ -28,9 +27,12 @@ const rotate90IconStyle = {
 
 type ComponentType = {
   title?: string
-  list: ProjectItem[]
+  list: ListItemType[]
   staticMode?: boolean
   newItemIcon?: React.ReactNode
+  onAdd?: (project: Partial<ListItemType>) => void
+  onUpdate?: (project: Partial<ListItemType>) => void
+  onDelete?: (project: Partial<ListItemType>) => void
 }
 
 const CollapsableList: React.FC<ComponentType> = ({
@@ -38,8 +40,10 @@ const CollapsableList: React.FC<ComponentType> = ({
   list = [],
   staticMode = false,
   newItemIcon,
+  onAdd = () => {},
+  onUpdate = () => {},
+  onDelete = () => {},
 }) => {
-  const [collapsableList, setCollapsableList] = useState(list)
   const [open, setOpen] = useState(true)
   const [isAdding, setIsAdding] = useState(false)
 
@@ -52,9 +56,8 @@ const CollapsableList: React.FC<ComponentType> = ({
     setIsAdding(true)
   }
 
-  const handleAddItem = (item: string, index: number) => {
-    // @ts-ignore
-    setCollapsableList([...collapsableList, { title: item, id: index + 1 }])
+  const handleAddItem = (title: string) => {
+    onAdd({ title })
     !open && setOpen(true)
     setIsAdding(false)
   }
@@ -63,16 +66,16 @@ const CollapsableList: React.FC<ComponentType> = ({
     setIsAdding(false)
   }
 
-  const handleUpdateItem = (value: string, index: number) => {
-    const listClone = JSON.parse(JSON.stringify(collapsableList))
-    listClone[index].label = value
-    setCollapsableList(listClone)
+  const handleUpdateItem = (value: string, id: number) => {
+    const updatedValues: Partial<ListItemType> = {
+      id,
+      title: value,
+    }
+    onUpdate(updatedValues)
   }
 
-  const handleDeleteItem = (index: number) => {
-    const listClone: ProjectItem[] = JSON.parse(JSON.stringify(collapsableList))
-    const newList = listClone.filter((item, i) => i !== index && item)
-    setCollapsableList(newList)
+  const handleDeleteItem = (id: number) => {
+    onDelete({ id })
   }
 
   return (
@@ -108,13 +111,13 @@ const CollapsableList: React.FC<ComponentType> = ({
       </Box>
       <TransitionGroup>
         {open &&
-          collapsableList.map((item, index) => (
+          list.map((item, index) => (
             <Collapse key={item.id}>
               <CollapsableListItem
                 item={item}
-                list={collapsableList}
-                onUpdate={(value) => handleUpdateItem(value, index)}
-                onDelete={() => handleDeleteItem(index)}
+                list={list}
+                onUpdate={(value) => handleUpdateItem(value, item.id)}
+                onDelete={() => handleDeleteItem(item.id)}
                 staticMode={staticMode}
               />
             </Collapse>
@@ -123,10 +126,10 @@ const CollapsableList: React.FC<ComponentType> = ({
           <Collapse>
             <AddListItem
               icon={newItemIcon}
-              onAdd={(v) => handleAddItem(v, collapsableList.length)}
+              onAdd={(v) => handleAddItem(v)}
               onCancel={handleCancelAddItem}
               onBlur={handleCancelAddItem}
-              list={collapsableList}
+              list={list}
             />
           </Collapse>
         )}

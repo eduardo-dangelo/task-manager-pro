@@ -3,6 +3,7 @@ import { InputAdornment, SxProps, TextField, Theme, Tooltip } from '@mui/materia
 import IconButton from '@mui/material/IconButton'
 import AddIcon from '@mui/icons-material/Add'
 import { AddItemScopeTypes } from '../src/types'
+import { HeadShake } from '../src/animations'
 
 const rotate90IconStyle = {
   '& svg': {
@@ -65,43 +66,45 @@ const AddItem: React.FC<ComponentType> = ({
   }
 
   return (
-    <TextField
-      {...props}
-      error={!!error}
-      autoFocus
-      size='small'
-      value={value}
-      onChange={handleChange}
-      onKeyDown={handleKeyPress}
-      helperText={error}
-      FormHelperTextProps={{
-        sx: {
-          fontSize: 10,
-          mb: -1,
-          position: 'absolute',
-          bottom: -10,
-        },
-      }}
-      InputProps={{
-        onBlur,
-        endAdornment: (
-          <InputAdornment position='end'>
-            <Tooltip title={scope === 'create' ? 'Add' : 'Update'}>
-              <IconButton
-                aria-label='toggle password visibility'
-                onClick={handleAddItem}
-                edge='end'
-                sx={rotate90IconStyle}
-                size='small'
-                color='primary'
-              >
-                <AddIcon />
-              </IconButton>
-            </Tooltip>
-          </InputAdornment>
-        ),
-      }}
-    />
+    <HeadShake when={error}>
+      <TextField
+        {...props}
+        error={!!error}
+        autoFocus
+        size='small'
+        value={value}
+        onChange={handleChange}
+        onKeyDown={handleKeyPress}
+        helperText={error}
+        FormHelperTextProps={{
+          sx: {
+            fontSize: 10,
+            mb: -1,
+            position: 'absolute',
+            bottom: -10,
+          },
+        }}
+        InputProps={{
+          onBlur,
+          endAdornment: (
+            <InputAdornment position='end'>
+              <Tooltip title={scope === 'create' ? 'Add' : 'Update'}>
+                <IconButton
+                  aria-label='toggle password visibility'
+                  onClick={handleAddItem}
+                  edge='end'
+                  sx={rotate90IconStyle}
+                  size='small'
+                  color='primary'
+                >
+                  <AddIcon />
+                </IconButton>
+              </Tooltip>
+            </InputAdornment>
+          ),
+        }}
+      />
+    </HeadShake>
   )
 }
 
