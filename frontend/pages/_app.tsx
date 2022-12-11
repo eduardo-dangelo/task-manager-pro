@@ -3,11 +3,10 @@ import type { AppProps } from 'next/app'
 import { ThemeProvider } from '@mui/material'
 import theme from '../src/theme'
 import PageLayout from '../components/PageLayout'
-import Home from './index'
 import { Provider } from 'react-redux'
+import { useEffect, useState } from 'react'
 import { configureStore } from '@reduxjs/toolkit'
 import projectsReducer from '../src/reducers/projects'
-import { useEffect, useState } from 'react'
 
 const store = configureStore({
   reducer: {

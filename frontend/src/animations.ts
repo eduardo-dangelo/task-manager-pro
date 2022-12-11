@@ -1,1 +1,7 @@
 export const HeadShake = require('react-reveal/HeadShake')
+export const Bounce = require('react-reveal/Bounce')
+export const Jump = require('react-reveal/Jump')
+export const Pulse = require('react-reveal/Pulse')
+export const Reveal = require('react-reveal/Reveal')
+export const Slide = require('react-reveal/Slide')
+export const Fade = require('react-reveal/Fade')

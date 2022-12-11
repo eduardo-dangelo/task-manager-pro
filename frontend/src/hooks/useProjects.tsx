@@ -2,12 +2,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { actionTypes } from '../reducers/projects'
-
-type ProjectType = {
-  title: string
-  id: number
-  create_at: string
-}
+import { ProjectType } from '../types'
 
 export default function useProjects() {
   const [projectsError, setProjectsError] = useState(null)
@@ -54,6 +49,7 @@ export default function useProjects() {
       .then((res) => getProjects())
   }
 
+  // will fetch projects whenever you invoke useProjects()
   useEffect(() => {
     getProjects()
   }, [])

@@ -9,7 +9,7 @@ export type ListItemType = {
 
 export type StatusType = 'IN' | 'IP' | 'PK' | 'BK' | 'CP' | 'CC'
 
-export type ProjectFromApiType = {
+export type ProjectType = {
   id: number
   title: string
   create_at: React.ReactNode

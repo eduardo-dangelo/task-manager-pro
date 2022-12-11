@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import { InputAdornment, SxProps, TextField, Theme, Tooltip } from '@mui/material'
 import IconButton from '@mui/material/IconButton'
 import AddIcon from '@mui/icons-material/Add'
-import { AddItemScopeTypes } from '../src/types'
-import { HeadShake } from '../src/animations'
+import { AddItemScopeTypes } from '../../src/types'
+import { HeadShake } from '../../src/animations'
+import SaveIcon from '@mui/icons-material/Save'
 
 const rotate90IconStyle = {
   '& svg': {
@@ -34,7 +35,7 @@ type ComponentType = {
   sx?: SxProps<Theme> | undefined
 }
 
-const AddItem: React.FC<ComponentType> = ({
+const AddListItemForm: React.FC<ComponentType> = ({
   initialValue = '',
   scope,
   onCancel,
@@ -88,16 +89,17 @@ const AddItem: React.FC<ComponentType> = ({
           onBlur,
           endAdornment: (
             <InputAdornment position='end'>
-              <Tooltip title={scope === 'create' ? 'Add' : 'Update'}>
+              <Tooltip title={scope === 'create' ? 'Add' : 'Save'}>
                 <IconButton
                   aria-label='toggle password visibility'
                   onClick={handleAddItem}
                   edge='end'
-                  sx={rotate90IconStyle}
+                  sx={scope === 'create' ? rotate90IconStyle : {}}
                   size='small'
                   color='primary'
                 >
-                  <AddIcon />
+                  {scope === 'create' && <AddIcon />}
+                  {scope === 'update' && <SaveIcon />}
                 </IconButton>
               </Tooltip>
             </InputAdornment>
@@ -108,4 +110,4 @@ const AddItem: React.FC<ComponentType> = ({
   )
 }
 
-export default AddItem
+export default AddListItemForm

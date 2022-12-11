@@ -6,8 +6,9 @@ import { Collapse, ListItem, Typography } from '@mui/material'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
 import { TransitionGroup } from 'react-transition-group'
 import AddListItem from './AddListItem'
-import { ListItemType, ProjectFromApiType } from '../../src/types'
-import CollapsableListItem from './CollapsableListItem'
+import { ListItemType, ProjectType } from '../../src/types'
+import DynamicListItem from './DynamicListItem'
+import { Pulse } from '../../src/animations'
 
 const rotate90IconStyle = {
   '& svg': {
@@ -35,7 +36,7 @@ type ComponentType = {
   onDelete?: (project: Partial<ListItemType>) => void
 }
 
-const CollapsableList: React.FC<ComponentType> = ({
+const DynamicList: React.FC<ComponentType> = ({
   title,
   list = [],
   staticMode = false,
@@ -53,7 +54,7 @@ const CollapsableList: React.FC<ComponentType> = ({
   }
 
   const handleAddIconClick = () => {
-    setIsAdding(true)
+    setIsAdding(!isAdding)
   }
 
   const handleAddItem = (title: string) => {
@@ -87,6 +88,7 @@ const CollapsableList: React.FC<ComponentType> = ({
           justifyContent: 'space-between',
           mt: 5,
           mb: 1,
+          position: 'relative',
         }}
       >
         {title && (
@@ -113,7 +115,7 @@ const CollapsableList: React.FC<ComponentType> = ({
         {open &&
           list.map((item, index) => (
             <Collapse key={item.id}>
-              <CollapsableListItem
+              <DynamicListItem
                 item={item}
                 list={list}
                 onUpdate={(value) => handleUpdateItem(value, item.id)}
@@ -138,4 +140,4 @@ const CollapsableList: React.FC<ComponentType> = ({
   )
 }
 
-export default CollapsableList
+export default DynamicList
