@@ -78,7 +78,11 @@ const Sidebar = () => {
           <Logo />
         </Link>
         <CollapsableList list={homeLinks} staticMode />
-        <CollapsableList list={data} title='PROJECTS' />
+        <CollapsableList
+          list={data}
+          title='PROJECTS'
+          newItemIcon={<DescriptionOutlinedIcon />}
+        />
       </FireNav>
     </Paper>
   )

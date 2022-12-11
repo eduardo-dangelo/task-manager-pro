@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import { ListItem } from '@mui/material'
-import LibraryAddCheckOutlinedIcon from '@mui/icons-material/LibraryAddCheckOutlined'
 import AddItem from '../AddItem'
-import { ScopeType } from '@typescript-eslint/scope-manager'
 import { AddItemScopeTypes, ProjectItem } from '../../src/types'
 
 type ComponentType = {
@@ -14,6 +12,7 @@ type ComponentType = {
   onBlur?: () => void
   scope?: AddItemScopeTypes
   selected?: boolean
+  icon?: React.ReactNode
 }
 
 const AddListItem: React.FC<ComponentType> = ({
@@ -24,6 +23,7 @@ const AddListItem: React.FC<ComponentType> = ({
   onBlur = () => {},
   scope = 'create',
   selected = false,
+  icon,
 }) => {
   const [error, setError] = useState<string>('')
 
@@ -51,17 +51,18 @@ const AddListItem: React.FC<ComponentType> = ({
       sx={{
         pt: PADDING_Y,
         pb: error ? 2 : PADDING_Y,
-        pl: 3,
+        paddingLeft: '1rem !important',
         minHeight: 32,
-        color: 'rgba(255,255,255,.8)',
         maxWidth: '100%',
         alignItems: 'center',
       }}
       selected={selected}
     >
-      {/*<ListItemIcon sx={{ color: 'inherit', paddingLeft: 1, marginRight: '0' }}>*/}
-      {/*  <LibraryAddCheckOutlinedIcon />*/}
-      {/*</ListItemIcon>*/}
+      {icon && (
+        <ListItemIcon sx={{ color: 'inherit', paddingLeft: 0, marginRight: '0' }}>
+          {icon}
+        </ListItemIcon>
+      )}
       <AddItem
         initialValue={initialValue}
         onBlur={onBlur}

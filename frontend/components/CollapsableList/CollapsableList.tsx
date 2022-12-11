@@ -30,17 +30,18 @@ type ComponentType = {
   title?: string
   list: ProjectItem[]
   staticMode?: boolean
+  newItemIcon?: React.ReactNode
 }
 
 const CollapsableList: React.FC<ComponentType> = ({
   title,
   list = [],
   staticMode = false,
+  newItemIcon,
 }) => {
   const [collapsableList, setCollapsableList] = useState(list)
   const [open, setOpen] = useState(true)
   const [isAdding, setIsAdding] = useState(false)
-  const [activeItem, setActiveItem] = useState<number>()
 
   const handleToggleList = () => {
     setOpen(!open)
@@ -52,6 +53,7 @@ const CollapsableList: React.FC<ComponentType> = ({
   }
 
   const handleAddItem = (item: string, index: number) => {
+    // @ts-ignore
     setCollapsableList([...collapsableList, { title: item, id: index + 1 }])
     !open && setOpen(true)
     setIsAdding(false)
@@ -90,6 +92,7 @@ const CollapsableList: React.FC<ComponentType> = ({
             sx={{
               fontSize: '0.9rem',
               cursor: 'pointer',
+              opacity: 0.5,
             }}
           >
             {title}
@@ -112,8 +115,6 @@ const CollapsableList: React.FC<ComponentType> = ({
                 list={collapsableList}
                 onUpdate={(value) => handleUpdateItem(value, index)}
                 onDelete={() => handleDeleteItem(index)}
-                onSelect={() => setActiveItem(item.id)}
-                selected={item.active || false}
                 staticMode={staticMode}
               />
             </Collapse>
@@ -121,8 +122,10 @@ const CollapsableList: React.FC<ComponentType> = ({
         {isAdding && !staticMode && (
           <Collapse>
             <AddListItem
+              icon={newItemIcon}
               onAdd={(v) => handleAddItem(v, collapsableList.length)}
               onCancel={handleCancelAddItem}
+              onBlur={handleCancelAddItem}
               list={collapsableList}
             />
           </Collapse>

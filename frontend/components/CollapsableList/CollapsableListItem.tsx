@@ -16,8 +16,6 @@ type ComponentType = {
   list: ProjectItem[]
   onUpdate: (value: string) => void
   onDelete: () => void
-  onSelect: (id: number) => void
-  selected: boolean
   staticMode?: boolean
 }
 
@@ -26,9 +24,7 @@ const CollapsableListItem: React.FC<ComponentType> = ({
   list = [],
   onUpdate = () => {},
   onDelete = () => {},
-  // selected,
   staticMode,
-  onSelect,
   ...props
 }) => {
   const [editMode, setEditMode] = useState(false)
@@ -70,32 +66,45 @@ const CollapsableListItem: React.FC<ComponentType> = ({
           scope='update'
           list={list}
           selected={selected}
+          icon={item.icon}
         />
       </Collapse>
     )
   }
 
   return (
-    <Link href={item.route} onClick={() => onSelect(item.id)} {...props}>
+    <Link href={item.route} {...props}>
       <ListItemButton
         selected={selected}
         sx={{
-          py: 1.2,
-          mb: 1,
+          py: 0.5,
+          mb: 0.5,
+          paddingLeft: '1rem !important',
           paddingRight: '0 !important',
           minHeight: 32,
           borderRadius: 2,
           background: selected ? `${theme.palette.primary.main} !important` : 'auto',
           color: selected ? 'white' : 'auto',
           ...visibleOnHover,
+          '&:hover svg': {
+            color: selected ? 'inherit' : 'primary.main',
+          },
         }}
       >
-        <ListItemIcon sx={{ color: 'inherit', paddingLeft: 0 }}>
+        <ListItemIcon
+          sx={{
+            color: selected ? 'inherit' : 'primary',
+            paddingLeft: 0,
+          }}
+        >
           {item?.icon}
         </ListItemIcon>
         <ListItemText
           primary={item?.title}
-          primaryTypographyProps={{ fontWeight: 'medium' }}
+          primaryTypographyProps={{
+            fontWeight: '100',
+            fontSize: '0.95rem',
+          }}
         />
         {!staticMode && (
           <>
@@ -105,12 +114,16 @@ const CollapsableListItem: React.FC<ComponentType> = ({
               aria-label='edit'
               size='small'
               color='inherit'
-              sx={{ mr: 0.2 }}
+              sx={{ mr: 0.2, color: selected ? 'inherit' : 'primary.main' }}
               onClick={() => setEditMode(true)}
             >
               <EditIcon fontSize='small' />
             </IconButton>
-            <TrashButton className='hidden-button' onDelete={onDelete} />
+            <TrashButton
+              className='hidden-button'
+              onDelete={onDelete}
+              sx={{ color: selected ? 'inherit' : 'primary.main' }}
+            />
           </>
         )}
       </ListItemButton>

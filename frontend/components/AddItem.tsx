@@ -6,7 +6,6 @@ import { AddItemScopeTypes } from '../src/types'
 
 const rotate90IconStyle = {
   '& svg': {
-    color: 'rgba(255,255,255,0.8)',
     transition: '0.2s',
     transform: 'translateX(0) rotate(0)',
   },
@@ -94,6 +93,7 @@ const AddItem: React.FC<ComponentType> = ({
                 edge='end'
                 sx={rotate90IconStyle}
                 size='small'
+                color='primary'
               >
                 <AddIcon />
               </IconButton>

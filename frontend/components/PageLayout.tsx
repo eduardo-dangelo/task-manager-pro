@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Sidebar from './Sidebar'
-import { Grid, IconButton, Slide, SwipeableDrawer } from '@mui/material'
+import { Grid, Slide } from '@mui/material'
 import { Box } from '@mui/system'
 import Head from 'next/head'
 import theme from '../src/theme'
@@ -33,7 +33,7 @@ const PageLayout: React.FC<ComponentType> = ({ page }) => {
             item
             display={{ xs: 'none', md: 'block' }}
             sx={{
-              width: '300px !important',
+              width: '280px !important',
               height: '100hv',
             }}
           >
