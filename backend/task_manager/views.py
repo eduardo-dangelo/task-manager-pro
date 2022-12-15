@@ -5,19 +5,21 @@ from .models import Project, Okr, Sprint, Task, Checklist, Note
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
-    queryset = Project.objects.all()
     serializer_class = ProjectSerializer
     permission_classes = [
-        permissions.AllowAny
+        permissions.IsAuthenticated
     ]
+
+    def get_queryset(self):
+        return self.request.user.projects.all()
+
+    def perform_create(self):
+        serializer.save(owner=self.request.user)
 
 
 class OkrViewSet(viewsets.ModelViewSet):
     queryset = Okr.objects.all()
     serializer_class = OkrSerializer
-    permission_classes = [
-        permissions.AllowAny
-    ]
 
 
 class SprintViewSet(viewsets.ModelViewSet):

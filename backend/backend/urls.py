@@ -17,6 +17,7 @@ from django.contrib import admin
 from task_manager import views
 from django.urls import path, include
 from rest_framework import routers
+from accounts.api import RegisterAPI
 
 router = routers.DefaultRouter()
 router.register(r'projects', views.ProjectViewSet, 'project')
@@ -28,5 +29,6 @@ router.register(r'notes', views.NoteViewSet, 'notes')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls))
+    path('api/', include(router.urls)),
+    path('', include('accounts.urls')),
 ]
