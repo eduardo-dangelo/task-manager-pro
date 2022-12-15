@@ -5,32 +5,33 @@ import BurgerDrawer from './BurgerDrawer'
 import Sidebar from './Sidebar'
 
 type ComponentType = {
-  page: React.ReactNode
+  children: React.ReactNode
   sidebar: React.ReactNode
 }
 
-const SidebarGrid: React.FC<ComponentType> = ({ page, sidebar }) => {
+const SidebarGrid: React.FC<ComponentType> = ({ children, sidebar }) => {
   return (
-    <Grid container spacing={0}>
+    <Box sx={{ display: 'flex', height: '100vh', flexGrow: 1 }}>
       <Paper
-        component={Grid}
+        flex={3}
+        component={Box}
         elevation={24}
-        item
         variant='elevation'
         display={{ xs: 'none', md: 'block' }}
         sx={{
           borderRadius: 0,
           height: '100vh',
-          width: '280px !important',
+          minWidth: '280px !important',
+          maxWidth: '280px !important',
         }}
       >
         {sidebar}
       </Paper>
-      <Grid item xs={12} md={9} lg={9.5}>
+      <Box flex={9}>
         <BurgerDrawer>{sidebar}</BurgerDrawer>
-        {page}
-      </Grid>
-    </Grid>
+        {children}
+      </Box>
+    </Box>
   )
 }
 

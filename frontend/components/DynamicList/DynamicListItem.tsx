@@ -87,7 +87,7 @@ const DynamicListItem: React.FC<ComponentType> = ({
           color: selected ? 'white' : 'auto',
           ...visibleOnHover,
           '&:hover svg': {
-            color: selected ? 'inherit' : 'primary.main',
+            color: selected ? 'inherit' : 'secondary.main',
           },
         }}
       >
