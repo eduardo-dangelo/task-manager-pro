@@ -1,14 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Sidebar from './Sidebar/Sidebar'
-import { Box } from '@mui/system'
 import Head from 'next/head'
 import SidebarGrid from './Sidebar/SidebarGrid'
+import useAuth from '../src/hooks/useAuth'
 
 type ComponentType = {
   page: React.ReactNode
 }
 
 const PageLayout: React.FC<ComponentType> = ({ page }) => {
+  // const { loadUser } = useAuth()
+  //
+  // useEffect(() => {
+  //   loadUser()
+  // }, [])
+
   return (
     <>
       <Head>
@@ -16,7 +22,7 @@ const PageLayout: React.FC<ComponentType> = ({ page }) => {
         <meta name='description' content='best project manager software.' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <SidebarGrid sidebar={<Sidebar />}>{page}</SidebarGrid>
+      <SidebarGrid sidebar={<Sidebar />} page={page} />
     </>
   )
 }

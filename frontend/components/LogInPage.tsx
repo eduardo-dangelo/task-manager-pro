@@ -11,19 +11,20 @@ import Typography from '@mui/material/Typography'
 import { Container, CssBaseline } from '@mui/material'
 import Copyright from './Copyright'
 import Link from 'next/link'
+import useAuth from '../src/hooks/useAuth'
 
 const LogInPage = () => {
+  const { login } = useAuth()
   const handleSubmit = (event: {
     preventDefault: () => void
     currentTarget: HTMLFormElement | undefined
   }) => {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
-    console.log({
-      email: data.get('email'),
+    login({
+      username: data.get('username'),
       password: data.get('password'),
     })
-    // navigate(routes.dashboard)
   }
 
   return (
@@ -49,10 +50,10 @@ const LogInPage = () => {
             margin='normal'
             required
             fullWidth
-            id='email'
-            label='Email Address'
-            name='email'
-            autoComplete='email'
+            id='username'
+            label='Username'
+            name='username'
+            autoComplete='username'
             autoFocus
           />
           <TextField
