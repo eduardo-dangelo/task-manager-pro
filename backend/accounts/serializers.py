@@ -20,6 +20,15 @@ class RegisterSerializer(serializers.ModelSerializer):
         return user
 
 
+class UpdateUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name']
+
+    def update(self, instance, validated_data):
+        return super().update(instance, validated_data)
+
+
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField()

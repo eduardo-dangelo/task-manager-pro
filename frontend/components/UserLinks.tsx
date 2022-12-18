@@ -8,8 +8,10 @@ import IconButton from '@mui/material/IconButton'
 import LogoutIcon from '@mui/icons-material/Logout'
 import ArrowRight from '@mui/icons-material/ArrowRight'
 import Link from 'next/link'
+import useAuth from '../src/hooks/useAuth'
 
 const UserLinks = () => {
+  const { logout } = useAuth()
   return (
     <ListItem component='div' disablePadding>
       <Tooltip title='View Profile'>
@@ -17,9 +19,10 @@ const UserLinks = () => {
           <ListItemButton
             sx={{
               height: 56,
-              paddingY: 4,
+              padding: 0,
+              px: 0,
               '& svg': {
-                color: 'rgba(255,255,255,0.8)',
+                // color: 'rgba(255,255,255,0.8)',
               },
             }}
           >
@@ -38,41 +41,39 @@ const UserLinks = () => {
         </Link>
       </Tooltip>
       <Tooltip title='Log Out'>
-        <Link href='/login'>
-          <IconButton
-            size='large'
-            sx={{
-              paddingX: 2,
-              '& svg': {
-                color: 'rgba(255,255,255,0.8)',
-                transition: '0.2s',
-                transform: 'translateX(0) rotate(0)',
+        <IconButton
+          onClick={logout}
+          size='large'
+          sx={{
+            paddingX: 2,
+            '& svg': {
+              transition: '0.2s',
+              transform: 'translateX(0) rotate(0)',
+            },
+            '&:hover, &:focus': {
+              bgcolor: 'unset',
+              '& svg:first-of-type': {
+                transform: 'translateX(-4px) rotate(-20deg)',
               },
-              '&:hover, &:focus': {
-                bgcolor: 'unset',
-                '& svg:first-of-type': {
-                  transform: 'translateX(-4px) rotate(-20deg)',
-                },
-                '& svg:last-of-type': {
-                  right: 0,
-                  opacity: 1,
-                },
+              '& svg:last-of-type': {
+                right: 0,
+                opacity: 1,
               },
-              '&:after': {
-                content: '""',
-                position: 'absolute',
-                height: '80%',
-                display: 'block',
-                left: 0,
-                width: '1px',
-                bgcolor: 'divider',
-              },
-            }}
-          >
-            <LogoutIcon />
-            <ArrowRight sx={{ position: 'absolute', right: 4, opacity: 0 }} />
-          </IconButton>
-        </Link>
+            },
+            '&:after': {
+              content: '""',
+              position: 'absolute',
+              height: '80%',
+              display: 'block',
+              left: 0,
+              width: '1px',
+              bgcolor: 'divider',
+            },
+          }}
+        >
+          <LogoutIcon />
+          <ArrowRight sx={{ position: 'absolute', right: 4, opacity: 0 }} />
+        </IconButton>
       </Tooltip>
     </ListItem>
   )

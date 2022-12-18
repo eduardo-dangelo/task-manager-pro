@@ -9,10 +9,9 @@ import DashboardIcon from '@mui/icons-material/Dashboard'
 import { ListItemType } from '../../src/types'
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined'
 import HouseIcon from '@mui/icons-material/House'
-import useProject from '../../src/hooks/useProjects'
 import useProjects from '../../src/hooks/useProjects'
-import { useEffect, useMemo, useState } from 'react'
 import { Box } from '@mui/material'
+import UserLinks from '../UserLinks'
 
 const FireNav = styled(List)({
   '& .MuiListItemButton-root': {
@@ -61,6 +60,7 @@ const Sidebar = () => {
           onUpdate={updateProject}
           onDelete={deleteProject}
         />
+        <UserLinks />
       </FireNav>
     </Box>
   )

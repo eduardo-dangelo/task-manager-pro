@@ -82,8 +82,8 @@ const LogInPage = () => {
         </Typography>
         <Box component='form' onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
-            error={!!localError?.username}
-            helperText={localError?.username}
+            error={!!localError?.username || !!error?.username}
+            helperText={localError?.username || error?.username?.join()}
             margin='normal'
             required
             fullWidth
@@ -94,8 +94,8 @@ const LogInPage = () => {
             autoFocus
           />
           <TextField
-            error={!!localError?.password}
-            helperText={localError?.password}
+            error={!!localError?.password || !!error?.password}
+            helperText={localError?.password || error?.password?.join()}
             margin='normal'
             required
             fullWidth

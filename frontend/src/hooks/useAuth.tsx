@@ -13,6 +13,25 @@ export type LoginFormType = {
   password: string
 }
 
+export type UpdateUserFormType = {
+  firstName: string
+  lastName: string
+}
+
+const tokenConfig = (token?: string) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }
+  const userToken = localStorage.token || token
+  if (userToken) {
+    // @ts-ignore
+    config.headers['Authorization'] = `Token ${userToken}`
+  }
+  return config
+}
+
 export default function useAuth() {
   const router = useRouter()
   const { user, error, isAuthenticated, isLoading, token } = useSelector(
@@ -41,19 +60,8 @@ export default function useAuth() {
 
   const loadUser = (route = '/dashboard') => {
     dispatch({ type: 'USER_LOADING' })
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-    const userToken = localStorage.token || token
-    if (userToken) {
-      // @ts-ignore
-      config.headers['Authorization'] = `Token ${userToken}`
-    }
-
     axios
-      .get('http://localhost:8000/api/auth/user', config)
+      .get('http://localhost:8000/api/auth/user', tokenConfig(token))
       .then((res) => {
         dispatch({
           type: 'USER_LOADED',
@@ -86,6 +94,10 @@ export default function useAuth() {
           type: 'LOGIN_SUCCESS',
           payload: res.data,
         })
+        // let route = '/dashboard'
+        // if (!res.data?.first_name || !res.data?.last_name) {
+        //   route = '/tell-us-more'
+        // }
         router.push('/dashboard')
       })
       .catch((error) => {
@@ -93,6 +105,17 @@ export default function useAuth() {
           type: 'LOGIN_FAIL',
           payload: error?.response?.data,
         })
+      })
+  }
+
+  const logout = () => {
+    axios
+      .post('http://localhost:8000/api/auth/logout', null, tokenConfig(token))
+      .then((res) => {
+        dispatch({
+          type: 'LOGOUT_SUCCESS',
+        })
+        router.push('/')
       })
   }
 
@@ -119,8 +142,45 @@ export default function useAuth() {
       .catch((error) => {
         dispatch({
           type: 'REGISTER_FAIL',
-          payload: error.response.data,
+          payload: error?.response?.data,
         })
+      })
+  }
+
+  const updateUser = ({ firstName, lastName }: UpdateUserFormType) => {
+    dispatch({ type: 'USER_LOADING' })
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'PATCH',
+        'Access-Control-Allow-Headers': 'Content-Type',
+      },
+    }
+
+    if (token) {
+      // @ts-ignore
+      config.headers['Authorization'] = `Token ${token}`
+    }
+
+    const body = JSON.stringify({ first_name: firstName, last_name: lastName })
+
+    axios
+      .patch(`http://localhost:8000/api/auth/user/${user?.id}`, body, config)
+      .then((res) => {
+        // dispatch({
+        //   type: 'LOGIN_SUCCESS',
+        //   payload: res.data,
+        // })
+        // router.push('/dashboard')
+        console.log('res', res)
+      })
+      .catch((error) => {
+        dispatch({
+          type: 'LOGIN_FAIL',
+          payload: error?.response?.data,
+        })
+        console.log('error', error)
       })
   }
 
@@ -134,5 +194,6 @@ export default function useAuth() {
     login,
     register,
     updateUser,
+    logout,
   }
 }

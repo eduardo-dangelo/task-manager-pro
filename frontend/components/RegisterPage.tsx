@@ -100,8 +100,8 @@ export default function RegisterPage() {
                 label='Username'
                 name='username'
                 autoComplete='username'
-                error={!!localError?.username}
-                helperText={localError?.username}
+                error={!!localError?.username || !!error?.username}
+                helperText={localError?.username || error?.username?.join()}
                 onChange={() => {
                   setLocalError({
                     ...localError,
@@ -118,8 +118,8 @@ export default function RegisterPage() {
                 label='Email Address'
                 name='email'
                 autoComplete='email'
-                error={!!localError?.email}
-                helperText={localError?.email}
+                error={!!localError?.email || !!error?.email}
+                helperText={localError?.email || error?.email}
                 onChange={() => {
                   setLocalError({
                     ...localError,
@@ -137,8 +137,8 @@ export default function RegisterPage() {
                 type='password'
                 id='password'
                 autoComplete='new-password'
-                error={!!localError?.password}
-                helperText={localError?.password}
+                error={!!localError?.password || !!error?.password}
+                helperText={localError?.password || error?.password}
                 onChange={() => {
                   setLocalError({
                     ...localError,

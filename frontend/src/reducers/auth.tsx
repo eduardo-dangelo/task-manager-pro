@@ -14,6 +14,8 @@ export type actionTypes =
   | 'LOGIN_FAIL'
   | 'REGISTER_SUCCESS'
   | 'REGISTER_FAIL'
+  | 'LOGOUT_SUCCESS'
+  | 'LOGOUT_FAIL'
 
 export default function (
   state = initialState,
@@ -55,6 +57,15 @@ export default function (
         isAuthenticated: false,
         isLoading: false,
         error: action.payload,
+      }
+    case 'LOGOUT_SUCCESS':
+      localStorage.removeItem('token')
+      return {
+        token: null,
+        user: null,
+        isAuthenticated: false,
+        isLoading: false,
+        error: null,
       }
     default:
       return state
