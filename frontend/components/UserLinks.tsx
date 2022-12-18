@@ -11,7 +11,7 @@ import Link from 'next/link'
 import useAuth from '../src/hooks/useAuth'
 
 const UserLinks = () => {
-  const { logout } = useAuth()
+  const { logout, user } = useAuth()
   return (
     <ListItem component='div' disablePadding>
       <Tooltip title='View Profile'>
@@ -30,7 +30,7 @@ const UserLinks = () => {
               <Avatar component='div' sizes='small' src='/broken-image.jpg' />
             </ListItemIcon>
             <ListItemText
-              primary='Eduardo DAngelo'
+              primary={`${user?.first_name} ${user?.last_name}`}
               primaryTypographyProps={{
                 color: 'primary',
                 fontWeight: 'medium',

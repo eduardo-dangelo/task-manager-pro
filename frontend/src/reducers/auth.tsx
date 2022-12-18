@@ -16,6 +16,7 @@ export type actionTypes =
   | 'REGISTER_FAIL'
   | 'LOGOUT_SUCCESS'
   | 'LOGOUT_FAIL'
+  | 'UPDATE_USER_SUCCESS'
 
 export default function (
   state = initialState,
@@ -45,6 +46,12 @@ export default function (
         token: action.payload.token,
         isLoading: false,
         isAuthenticated: true,
+      }
+    case 'UPDATE_USER_SUCCESS':
+      return {
+        ...state,
+        user: action.payload.user,
+        isLoading: false,
       }
     case 'AUTH_ERROR':
     case 'LOGIN_FAIL':

@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 import { useRouter } from 'next/router'
+import { tokenConfig } from '../utils'
 
 export type RegisterFormType = {
   username: string
@@ -18,18 +19,12 @@ export type UpdateUserFormType = {
   lastName: string
 }
 
-const tokenConfig = (token?: string) => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
+const getRoute = (res: AxiosResponse<any>) => {
+  let route = '/dashboard'
+  if (!res.data?.user?.first_name || !res.data?.user?.last_name) {
+    route = '/tell-us-more'
   }
-  const userToken = localStorage.token || token
-  if (userToken) {
-    // @ts-ignore
-    config.headers['Authorization'] = `Token ${userToken}`
-  }
-  return config
+  return route
 }
 
 export default function useAuth() {
@@ -94,11 +89,7 @@ export default function useAuth() {
           type: 'LOGIN_SUCCESS',
           payload: res.data,
         })
-        // let route = '/dashboard'
-        // if (!res.data?.first_name || !res.data?.last_name) {
-        //   route = '/tell-us-more'
-        // }
-        router.push('/dashboard')
+        router.push(getRoute(res))
       })
       .catch((error) => {
         dispatch({
@@ -115,7 +106,7 @@ export default function useAuth() {
         dispatch({
           type: 'LOGOUT_SUCCESS',
         })
-        router.push('/')
+        router.push('/login')
       })
   }
 
@@ -137,7 +128,8 @@ export default function useAuth() {
           type: 'REGISTER_SUCCESS',
           payload: res.data,
         })
-        router.push('/dashboard')
+
+        router.push(getRoute(res))
       })
       .catch((error) => {
         dispatch({
@@ -149,37 +141,24 @@ export default function useAuth() {
 
   const updateUser = ({ firstName, lastName }: UpdateUserFormType) => {
     dispatch({ type: 'USER_LOADING' })
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'PATCH',
-        'Access-Control-Allow-Headers': 'Content-Type',
-      },
-    }
-
-    if (token) {
-      // @ts-ignore
-      config.headers['Authorization'] = `Token ${token}`
-    }
-
     const body = JSON.stringify({ first_name: firstName, last_name: lastName })
 
+    console.log('token', token)
     axios
-      .patch(`http://localhost:8000/api/auth/user/${user?.id}`, body, config)
+      .patch(`http://localhost:8000/api/auth/users`, body, tokenConfig(token))
       .then((res) => {
-        // dispatch({
-        //   type: 'LOGIN_SUCCESS',
-        //   payload: res.data,
-        // })
-        // router.push('/dashboard')
+        dispatch({
+          type: 'UPDATE_USER_SUCCESS',
+          payload: res.data,
+        })
+        router.push('/dashboard')
         console.log('res', res)
       })
       .catch((error) => {
-        dispatch({
-          type: 'LOGIN_FAIL',
-          payload: error?.response?.data,
-        })
+        // dispatch({
+        //   type: 'LOGIN_FAIL',
+        //   payload: error?.response?.data,
+        // })
         console.log('error', error)
       })
   }

@@ -1,9 +1,10 @@
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from knox.models import AuthToken
 from .serializers import UserSerializer, RegisterSerializer, LoginSerializer, UpdateUserSerializer
 from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
 
 class RegisterAPI(generics.GenericAPIView):
     serializer_class = RegisterSerializer
@@ -31,30 +32,22 @@ class LoginAPI(generics.GenericAPIView):
         })
 
 
+class UserUpdateView(generics.UpdateAPIView):
+    serializer_class = UserSerializer
+    permission_classes = (permissions.IsAuthenticated,)
 
-class UpdateUserView(APIView):
-    def put(self, request, pk):
-        # update user first_name and last_name
-        user = User.objects.get(id=pk)
+    def get_object(self):
+        return get_object_or_404(User, pk=self.request.user.id)
+
+    def patch(self, request, *args, **kwargs):
+        user = self.get_object()
         user.first_name = request.data.get('first_name')
         user.last_name = request.data.get('last_name')
-        serializer = UserSerializer(user, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=400)
+        user.save()
+        return Response({
+            "user": UserSerializer(user, context=self.get_serializer_context()).data,
+        })
 
-    def options(self, request, pk):
-        response = Response()
-        response['Access-Control-Allow-Origin'] = '*'
-        response['Access-Control-Allow-Methods'] = 'PATCH'
-        response['Access-Control-Allow-Headers'] = 'Content-Type'
-        return response
-
-
-class UpdateUser(generics.UpdateAPIView):
-    serializer_class = UpdateUserSerializer
-    queryset = User.objects.all()
 
 
 class UserAPI(generics.RetrieveAPIView):

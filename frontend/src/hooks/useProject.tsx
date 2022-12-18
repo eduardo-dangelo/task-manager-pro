@@ -3,23 +3,28 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { actionTypes } from '../reducers/projects'
 import { ProjectType } from '../types'
+import { tokenConfig } from '../utils'
 
 export default function useProject() {
   const [projectError, setProjectError] = useState(null)
-  const { project } = useSelector(
+  const { project, token } = useSelector(
     (state: {
+      auth: {
+        token: string
+      }
       projects: {
         project: ProjectType
       }
     }) => ({
       project: state?.projects?.project,
+      token: state?.auth?.token,
     }),
   )
   const dispatch = useDispatch()
 
   const getProject = (id: number) => {
     axios
-      .get(`http://localhost:8000/api/projects/${id}/`)
+      .get(`http://localhost:8000/api/projects/${id}/`, tokenConfig(token))
       .then((res) => {
         console.log('res', res)
         dispatch({
@@ -32,7 +37,11 @@ export default function useProject() {
 
   const updateProject = (project: Partial<ProjectType>) => {
     axios
-      .put(`http://localhost:8000/api/projects/${project.id}/`, project)
+      .put(
+        `http://localhost:8000/api/projects/${project.id}/`,
+        project,
+        tokenConfig(token),
+      )
       .then((res) => {
         dispatch({
           type: actionTypes.GET_PROJECT,
@@ -44,7 +53,7 @@ export default function useProject() {
 
   const deleteProject = (project: Partial<ProjectType>) => {
     axios
-      .delete(`http://localhost:8000/api/projects/${project.id}/`)
+      .delete(`http://localhost:8000/api/projects/${project.id}/`, tokenConfig(token))
       .then((res) => {
         dispatch({
           type: actionTypes.GET_PROJECT,
