@@ -13,10 +13,12 @@ import Link from 'next/link'
 import useAuth, { LoginFormType } from '../src/hooks/useAuth'
 // @ts-ignore
 import LoadingButton from '@mui/lab/LoadingButton'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 
 const LogInPage = () => {
-  const { login, isLoading, error } = useAuth()
+  const router = useRouter()
+  const { login, isLoading, error, isAuthenticated, loadUser } = useAuth()
   const [localError, setLocalError] = useState<Partial<LoginFormType>>({})
 
   function validateForm(formData: LoginFormType) {
@@ -49,6 +51,16 @@ const LogInPage = () => {
     }
     validateForm(formData) && login(formData)
   }
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      setTimeout(() => {
+        router.push('/dashboard')
+      }, 500)
+    } else {
+      loadUser()
+    }
+  }, [])
 
   return (
     <Container component='main' maxWidth='xs'>

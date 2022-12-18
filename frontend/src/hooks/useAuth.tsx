@@ -39,16 +39,17 @@ export default function useAuth() {
   )
   const dispatch = useDispatch()
 
-  const loadUser = () => {
+  const loadUser = (route = '/dashboard') => {
     dispatch({ type: 'USER_LOADING' })
     const config = {
       headers: {
         'Content-Type': 'application/json',
       },
     }
-    if (token) {
+    const userToken = localStorage.token || token
+    if (userToken) {
       // @ts-ignore
-      config.headers['Authorization'] = `Token ${token}`
+      config.headers['Authorization'] = `Token ${userToken}`
     }
 
     axios
@@ -58,11 +59,12 @@ export default function useAuth() {
           type: 'USER_LOADED',
           payload: res.data,
         })
+        router.push(route)
       })
       .catch((error) => {
         dispatch({
           type: 'AUTH_ERROR',
-          payload: error.message,
+          payload: error?.message,
         })
       })
   }
@@ -89,7 +91,7 @@ export default function useAuth() {
       .catch((error) => {
         dispatch({
           type: 'LOGIN_FAIL',
-          payload: error.response.data,
+          payload: error?.response?.data,
         })
       })
   }
@@ -131,5 +133,6 @@ export default function useAuth() {
     loadUser,
     login,
     register,
+    updateUser,
   }
 }

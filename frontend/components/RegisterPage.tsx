@@ -14,10 +14,12 @@ import Copyright from './Copyright'
 import Link from 'next/link'
 import useAuth, { RegisterFormType } from '../src/hooks/useAuth'
 import LoadingButton from '@mui/lab/LoadingButton'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 
 export default function RegisterPage() {
-  const { register, error, isLoading } = useAuth()
+  const router = useRouter()
+  const { register, error, isLoading, isAuthenticated, loadUser } = useAuth()
   const [localError, setLocalError] = useState<Partial<RegisterFormType>>({})
   // todo: on register user should add first and last name
 
@@ -61,6 +63,16 @@ export default function RegisterPage() {
     validateForm(formData) && register(formData)
   }
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      setTimeout(() => {
+        router.push('/dashboard')
+      }, 500)
+    } else {
+      loadUser()
+    }
+  }, [])
+
   return (
     <Container component='main' maxWidth='xs'>
       <CssBaseline />
@@ -80,27 +92,6 @@ export default function RegisterPage() {
         </Typography>
         <Box component='form' noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
-            {/*<Grid item xs={12} sm={6}>*/}
-            {/*  <TextField*/}
-            {/*    autoComplete='given-name'*/}
-            {/*    name='firstName'*/}
-            {/*    required*/}
-            {/*    fullWidth*/}
-            {/*    id='firstName'*/}
-            {/*    label='First Name'*/}
-            {/*    autoFocus*/}
-            {/*  />*/}
-            {/*</Grid>*/}
-            {/*<Grid item xs={12} sm={6}>*/}
-            {/*  <TextField*/}
-            {/*    required*/}
-            {/*    fullWidth*/}
-            {/*    id='lastName'*/}
-            {/*    label='Last Name'*/}
-            {/*    name='lastName'*/}
-            {/*    autoComplete='family-name'*/}
-            {/*  />*/}
-            {/*</Grid>*/}
             <Grid item xs={12}>
               <TextField
                 required
