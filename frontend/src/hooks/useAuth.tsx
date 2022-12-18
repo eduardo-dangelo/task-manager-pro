@@ -2,6 +2,17 @@ import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 
+export type RegisterFormType = {
+  username: string
+  email: string
+  password: string
+}
+
+export type LoginFormType = {
+  username: string
+  password: string
+}
+
 export default function useAuth() {
   const router = useRouter()
   const { user, error, isAuthenticated, isLoading, token } = useSelector(
@@ -11,14 +22,19 @@ export default function useAuth() {
         token: string
         isAuthenticated: boolean
         isLoading: boolean
-        error: string | null
+        error: {
+          username?: string[]
+          email?: string[]
+          password?: string[]
+          non_field_errors?: []
+        } | null
       }
     }) => ({
-      user: state.auth.user,
-      token: state.auth.token,
-      isAuthenticated: state.auth.user,
-      isLoading: state.auth.user,
-      error: state.auth.user,
+      user: state?.auth?.user,
+      token: state?.auth?.token,
+      isAuthenticated: state?.auth?.isAuthenticated,
+      isLoading: state?.auth?.isLoading,
+      error: state?.auth?.error,
     }),
   )
   const dispatch = useDispatch()
@@ -46,12 +62,12 @@ export default function useAuth() {
       .catch((error) => {
         dispatch({
           type: 'AUTH_ERROR',
-          payload: error,
+          payload: error.message,
         })
       })
   }
 
-  const login = ({ username, password }: { username: string, password: string }) => {
+  const login = ({ username, password }: LoginFormType) => {
     dispatch({ type: 'USER_LOADING' })
     const config = {
       headers: {
@@ -73,7 +89,35 @@ export default function useAuth() {
       .catch((error) => {
         dispatch({
           type: 'LOGIN_FAIL',
-          payload: error,
+          payload: error.response.data,
+        })
+      })
+  }
+
+  const register = ({ username, email, password }: RegisterFormType) => {
+    dispatch({ type: 'USER_LOADING' })
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+
+    const body = JSON.stringify({ username, email, password })
+
+    axios
+      .post('http://localhost:8000/api/auth/register', body, config)
+      .then((res) => {
+        console.log('res.data', res.data)
+        dispatch({
+          type: 'REGISTER_SUCCESS',
+          payload: res.data,
+        })
+        router.push('/dashboard')
+      })
+      .catch((error) => {
+        dispatch({
+          type: 'REGISTER_FAIL',
+          payload: error.response.data,
         })
       })
   }
@@ -86,5 +130,6 @@ export default function useAuth() {
     token,
     loadUser,
     login,
+    register,
   }
 }

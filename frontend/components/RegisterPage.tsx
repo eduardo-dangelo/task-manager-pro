@@ -12,18 +12,53 @@ import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import Copyright from './Copyright'
 import Link from 'next/link'
+import useAuth, { RegisterFormType } from '../src/hooks/useAuth'
+import LoadingButton from '@mui/lab/LoadingButton'
+import { useState } from 'react'
 
 export default function RegisterPage() {
+  const { register, error, isLoading } = useAuth()
+  const [localError, setLocalError] = useState<Partial<RegisterFormType>>({})
+  // todo: on register user should add first and last name
+
+  function validateForm(formData: RegisterFormType) {
+    const errors: Partial<RegisterFormType> = {}
+    let isValid = true
+
+    if (!formData.username) {
+      isValid = false
+      errors.username = 'Username is required'
+    }
+
+    if (!formData.email) {
+      isValid = false
+      errors.email = 'Email is required'
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      isValid = false
+      errors.email = 'Email is invalid'
+    }
+
+    if (!formData.password) {
+      isValid = false
+      errors.password = 'Password is required'
+    }
+
+    setLocalError(errors)
+    return isValid
+  }
+
   const handleSubmit = (event: {
     preventDefault: () => void
     currentTarget: HTMLFormElement | undefined
   }) => {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    })
+    const formData = {
+      username: data.get('username') as string,
+      email: data.get('email') as string,
+      password: data.get('password') as string,
+    }
+    validateForm(formData) && register(formData)
   }
 
   return (
@@ -45,25 +80,43 @@ export default function RegisterPage() {
         </Typography>
         <Box component='form' noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            {/*<Grid item xs={12} sm={6}>*/}
+            {/*  <TextField*/}
+            {/*    autoComplete='given-name'*/}
+            {/*    name='firstName'*/}
+            {/*    required*/}
+            {/*    fullWidth*/}
+            {/*    id='firstName'*/}
+            {/*    label='First Name'*/}
+            {/*    autoFocus*/}
+            {/*  />*/}
+            {/*</Grid>*/}
+            {/*<Grid item xs={12} sm={6}>*/}
+            {/*  <TextField*/}
+            {/*    required*/}
+            {/*    fullWidth*/}
+            {/*    id='lastName'*/}
+            {/*    label='Last Name'*/}
+            {/*    name='lastName'*/}
+            {/*    autoComplete='family-name'*/}
+            {/*  />*/}
+            {/*</Grid>*/}
+            <Grid item xs={12}>
               <TextField
-                autoComplete='given-name'
-                name='firstName'
                 required
                 fullWidth
-                id='firstName'
-                label='First Name'
-                autoFocus
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                fullWidth
-                id='lastName'
-                label='Last Name'
-                name='lastName'
-                autoComplete='family-name'
+                id='username'
+                label='Username'
+                name='username'
+                autoComplete='username'
+                error={!!localError?.username}
+                helperText={localError?.username}
+                onChange={() => {
+                  setLocalError({
+                    ...localError,
+                    username: undefined,
+                  })
+                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -74,6 +127,14 @@ export default function RegisterPage() {
                 label='Email Address'
                 name='email'
                 autoComplete='email'
+                error={!!localError?.email}
+                helperText={localError?.email}
+                onChange={() => {
+                  setLocalError({
+                    ...localError,
+                    email: undefined,
+                  })
+                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -85,6 +146,14 @@ export default function RegisterPage() {
                 type='password'
                 id='password'
                 autoComplete='new-password'
+                error={!!localError?.password}
+                helperText={localError?.password}
+                onChange={() => {
+                  setLocalError({
+                    ...localError,
+                    password: undefined,
+                  })
+                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -94,9 +163,19 @@ export default function RegisterPage() {
               />
             </Grid>
           </Grid>
-          <Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
+          {error?.non_field_errors && (
+            <Typography color='error'>{error?.non_field_errors?.join(', ')}</Typography>
+          )}
+          <LoadingButton
+            type='submit'
+            fullWidth
+            variant='contained'
+            sx={{ mt: 3, mb: 2 }}
+            loading={!!isLoading}
+            loadingPosition='start'
+          >
             Sign Up
-          </Button>
+          </LoadingButton>
           <Grid container justifyContent='flex-end'>
             <Grid item>
               <Link href='/login'>Already have an account? Sign in</Link>

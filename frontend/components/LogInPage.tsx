@@ -1,6 +1,5 @@
 import * as React from 'react'
 import Avatar from '@mui/material/Avatar'
-import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
@@ -11,20 +10,44 @@ import Typography from '@mui/material/Typography'
 import { Container, CssBaseline } from '@mui/material'
 import Copyright from './Copyright'
 import Link from 'next/link'
-import useAuth from '../src/hooks/useAuth'
+import useAuth, { LoginFormType } from '../src/hooks/useAuth'
+// @ts-ignore
+import LoadingButton from '@mui/lab/LoadingButton'
+import { useState } from 'react'
 
 const LogInPage = () => {
-  const { login } = useAuth()
+  const { login, isLoading, error } = useAuth()
+  const [localError, setLocalError] = useState<Partial<LoginFormType>>({})
+
+  function validateForm(formData: LoginFormType) {
+    const errors: Partial<LoginFormType> = {}
+    let isValid = true
+
+    if (!formData.username) {
+      isValid = false
+      errors.username = 'Username is required'
+    }
+
+    if (!formData.password) {
+      isValid = false
+      errors.password = 'Password is required'
+    }
+
+    setLocalError(errors)
+    return isValid
+  }
+
   const handleSubmit = (event: {
     preventDefault: () => void
     currentTarget: HTMLFormElement | undefined
   }) => {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
-    login({
-      username: data.get('username'),
-      password: data.get('password'),
-    })
+    const formData = {
+      username: data.get('username') as string,
+      password: data.get('password') as string,
+    }
+    validateForm(formData) && login(formData)
   }
 
   return (
@@ -43,10 +66,12 @@ const LogInPage = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component='h3' variant='h6'>
-          Sign in
+          Log In
         </Typography>
         <Box component='form' onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
+            error={!!localError?.username}
+            helperText={localError?.username}
             margin='normal'
             required
             fullWidth
@@ -57,6 +82,8 @@ const LogInPage = () => {
             autoFocus
           />
           <TextField
+            error={!!localError?.password}
+            helperText={localError?.password}
             margin='normal'
             required
             fullWidth
@@ -70,9 +97,19 @@ const LogInPage = () => {
             control={<Checkbox value='remember' color='primary' />}
             label='Remember me'
           />
-          <Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
-            Sign In
-          </Button>
+          {error?.non_field_errors && (
+            <Typography color='error'>{error?.non_field_errors?.join(', ')}</Typography>
+          )}
+          <LoadingButton
+            type='submit'
+            fullWidth
+            variant='contained'
+            sx={{ mt: 3, mb: 2 }}
+            loading={!!isLoading}
+            loadingPosition='start'
+          >
+            logIn
+          </LoadingButton>
           <Grid container>
             <Grid item xs>
               <Link href='/forgot-password'>Forgot password?</Link>

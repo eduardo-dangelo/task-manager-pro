@@ -12,6 +12,8 @@ export type actionTypes =
   | 'AUTH_ERROR'
   | 'LOGIN_SUCCESS'
   | 'LOGIN_FAIL'
+  | 'REGISTER_SUCCESS'
+  | 'REGISTER_FAIL'
 
 export default function (
   state = initialState,
@@ -21,7 +23,7 @@ export default function (
     case 'USER_LOADING':
       return {
         ...state,
-        isLoading: action.payload,
+        isLoading: true,
         error: null,
       }
     case 'USER_LOADED':
@@ -33,6 +35,7 @@ export default function (
         error: null,
       }
     case 'LOGIN_SUCCESS':
+    case 'REGISTER_SUCCESS':
       localStorage.setItem('token', action.payload.token)
       return {
         ...state,
@@ -43,6 +46,7 @@ export default function (
       }
     case 'AUTH_ERROR':
     case 'LOGIN_FAIL':
+    case 'REGISTER_FAIL':
       localStorage.removeItem('token')
       return {
         ...state,
