@@ -8,15 +8,15 @@ import Box from '@mui/material/Box'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import { Container, CssBaseline } from '@mui/material'
-import Copyright from './Copyright'
+import Copyright from '../Copyright'
 import Link from 'next/link'
-import useAuth, { LoginFormType } from '../src/hooks/useAuth'
+import useAuth, { LoginFormType } from '../../src/hooks/useAuth'
 // @ts-ignore
 import LoadingButton from '@mui/lab/LoadingButton'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
-const LogInPage = () => {
+const LogInForm = () => {
   const router = useRouter()
   const { login, isLoading, error, isAuthenticated, loadUser } = useAuth()
   const [localError, setLocalError] = useState<Partial<LoginFormType>>({})
@@ -140,4 +140,4 @@ const LogInPage = () => {
   )
 }
 
-export default LogInPage
+export default LogInForm

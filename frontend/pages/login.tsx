@@ -1,8 +1,8 @@
 import React from 'react'
-import LogInPage from '../components/LogInPage'
+import LogInForm from '../components/auth/LogInForm'
 
 const Login = () => {
-  return <LogInPage />
+  return <LogInForm />
 }
 
 // Login.getLayout = PageLayout

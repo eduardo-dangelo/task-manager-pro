@@ -4,6 +4,8 @@ const initialState = {
   isAuthenticated: false,
   isLoading: false,
   error: null,
+  hasRequestedPasswordReset: false,
+  hasResetPassword: false,
 }
 
 export type actionTypes =
@@ -17,6 +19,10 @@ export type actionTypes =
   | 'LOGOUT_SUCCESS'
   | 'LOGOUT_FAIL'
   | 'UPDATE_USER_SUCCESS'
+  | 'REQUEST_PASSWORD_RESET_SUCCESS'
+  | 'REQUEST_PASSWORD_RESET_FAIL'
+  | 'CONFIRM_PASSWORD_RESET_SUCCESS'
+  | 'CONFIRM_PASSWORD_RESET_FAIL'
 
 export default function (
   state = initialState,
@@ -46,6 +52,8 @@ export default function (
         token: action.payload.token,
         isLoading: false,
         isAuthenticated: true,
+        hasResetPassword: false,
+        hasRequestedPasswordReset: false,
       }
     case 'UPDATE_USER_SUCCESS':
       return {
@@ -73,6 +81,31 @@ export default function (
         isAuthenticated: false,
         isLoading: false,
         error: null,
+        hasRequestedPasswordReset: false,
+        hasResetPassword: false,
+      }
+    case 'REQUEST_PASSWORD_RESET_SUCCESS':
+      return {
+        ...state,
+        hasRequestedPasswordReset: true,
+        error: null,
+      }
+    case 'REQUEST_PASSWORD_RESET_FAIL':
+      return {
+        ...state,
+        hasRequestedPasswordReset: false,
+        error: action.payload,
+      }
+    case 'CONFIRM_PASSWORD_RESET_SUCCESS':
+      return {
+        ...state,
+        hasRequestedPasswordReset: false,
+        hasResetPassword: true,
+      }
+    case 'CONFIRM_PASSWORD_RESET_FAIL':
+      return {
+        ...state,
+        error: action.payload,
       }
     default:
       return state

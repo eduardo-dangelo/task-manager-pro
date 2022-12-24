@@ -21,9 +21,6 @@ const UserLinks = () => {
               height: 56,
               padding: 0,
               px: 0,
-              '& svg': {
-                // color: 'rgba(255,255,255,0.8)',
-              },
             }}
           >
             <ListItemIcon>

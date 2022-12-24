@@ -28,7 +28,7 @@ const FireNav = styled(List)({
 })
 
 const homeLinks: ListItemType[] = [
-  { id: 1, title: 'Home', icon: <HouseIcon />, route: '/' },
+  // { id: 1, title: 'Home', icon: <HouseIcon />, route: '/' },
   {
     id: 2,
     title: 'Dashboard',
@@ -46,6 +46,7 @@ const Sidebar = () => {
         <Link href='/'>
           <Logo />
         </Link>
+        <UserLinks />
         <DynamicList list={homeLinks} staticMode />
         <DynamicList
           list={projects?.map((project) => ({
@@ -60,7 +61,6 @@ const Sidebar = () => {
           onUpdate={updateProject}
           onDelete={deleteProject}
         />
-        <UserLinks />
       </FireNav>
     </Box>
   )

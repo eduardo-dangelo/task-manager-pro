@@ -19,6 +19,15 @@ export type UpdateUserFormType = {
   lastName: string
 }
 
+export type ResetPasswordRequestFormType = {
+  email: string
+}
+
+export type ResetPasswordConfirmFormType = {
+  password: string
+  token: string
+}
+
 const getRoute = (res: AxiosResponse<any>) => {
   let route = '/dashboard'
   if (!res.data?.user?.first_name || !res.data?.user?.last_name) {
@@ -29,7 +38,15 @@ const getRoute = (res: AxiosResponse<any>) => {
 
 export default function useAuth() {
   const router = useRouter()
-  const { user, error, isAuthenticated, isLoading, token } = useSelector(
+  const {
+    user,
+    error,
+    isAuthenticated,
+    isLoading,
+    token,
+    hasRequestedPasswordReset,
+    hasResetPassword,
+  } = useSelector(
     (state: {
       auth: {
         user: any
@@ -42,6 +59,8 @@ export default function useAuth() {
           password?: string[]
           non_field_errors?: []
         } | null
+        hasRequestedPasswordReset: boolean
+        hasResetPassword: boolean
       }
     }) => ({
       user: state?.auth?.user,
@@ -49,6 +68,8 @@ export default function useAuth() {
       isAuthenticated: state?.auth?.isAuthenticated,
       isLoading: state?.auth?.isLoading,
       error: state?.auth?.error,
+      hasRequestedPasswordReset: state?.auth?.hasRequestedPasswordReset,
+      hasResetPassword: state?.auth?.hasResetPassword,
     }),
   )
   const dispatch = useDispatch()
@@ -163,6 +184,55 @@ export default function useAuth() {
       })
   }
 
+  const resetPasswordRequest = ({ email }: ResetPasswordRequestFormType) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+
+    const body = JSON.stringify({ email })
+
+    axios
+      .post('http://localhost:8000/api/auth/password_reset/', body, config)
+      .then((res) => {
+        dispatch({
+          type: 'REQUEST_PASSWORD_RESET_SUCCESS',
+        })
+      })
+      .catch((error) => {
+        dispatch({
+          type: 'REQUEST_PASSWORD_RESET_FAIL',
+          payload: error?.response?.data,
+        })
+      })
+  }
+
+  const resetPasswordConfirm = ({ password, token }: ResetPasswordConfirmFormType) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+
+    const body = JSON.stringify({ password, token })
+
+    axios
+      .post('http://localhost:8000/api/auth/password_reset/confirm/', body, config)
+      .then((res) => {
+        dispatch({
+          type: 'CONFIRM_PASSWORD_RESET_SUCCESS',
+        })
+      })
+      .catch((error) => {
+        console.log('error', error)
+        dispatch({
+          type: 'CONFIRM_PASSWORD_RESET_FAIL',
+          payload: error?.response?.data,
+        })
+      })
+  }
+
   return {
     user,
     error,
@@ -174,5 +244,9 @@ export default function useAuth() {
     register,
     updateUser,
     logout,
+    hasRequestedPasswordReset,
+    hasResetPassword,
+    resetPasswordRequest,
+    resetPasswordConfirm,
   }
 }

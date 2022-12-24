@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import PageLayout from '../components/PageLayout'
 import { useRouter } from 'next/router'
+import Chess from '../components/Chess'
 
 const Dashboard = () => {
   const router = useRouter()
@@ -9,7 +10,11 @@ const Dashboard = () => {
       router.push('/login')
     }
   }, [])
-  return <div>Dashboard</div>
+  return (
+    <div>
+      <Chess />
+    </div>
+  )
 }
 
 Dashboard.getLayout = (page: React.ReactNode) => {

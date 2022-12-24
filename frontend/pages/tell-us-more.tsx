@@ -1,5 +1,5 @@
 import React from 'react'
-import TellUsMoreForm from '../components/TellUsMoreForm'
+import TellUsMoreForm from '../components/auth/TellUsMoreForm'
 
 const TellUsMore = () => {
   return <TellUsMoreForm />

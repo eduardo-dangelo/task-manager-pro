@@ -10,18 +10,17 @@ import Box from '@mui/material/Box'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
-import Copyright from './Copyright'
+import Copyright from '../Copyright'
 import Link from 'next/link'
-import useAuth, { RegisterFormType } from '../src/hooks/useAuth'
+import useAuth, { RegisterFormType } from '../../src/hooks/useAuth'
 import LoadingButton from '@mui/lab/LoadingButton'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
-export default function RegisterPage() {
+export default function RegisterForm() {
   const router = useRouter()
   const { register, error, isLoading, isAuthenticated, loadUser } = useAuth()
   const [localError, setLocalError] = useState<Partial<RegisterFormType>>({})
-  // todo: on register user should add first and last name
 
   function validateForm(formData: RegisterFormType) {
     const errors: Partial<RegisterFormType> = {}
