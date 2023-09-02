@@ -86,7 +86,7 @@ const DynamicList: React.FC<ComponentType> = ({
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          mt: 5,
+          // mt: 5,
           mb: 1,
           position: 'relative',
         }}

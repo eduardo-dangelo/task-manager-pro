@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Paper } from '@mui/material'
+import {Card, Grid, Paper} from '@mui/material'
 import { Box } from '@mui/system'
 import BurgerDrawer from './BurgerDrawer'
 import Sidebar from './Sidebar'
@@ -13,11 +13,10 @@ type ComponentType = {
 const ResponsiveSidebarWrapper: React.FC<ComponentType> = ({ page, sidebar }) => {
   return (
     <Box sx={{ display: 'flex', height: '100vh', flexGrow: 1 }}>
-      <Paper
+      <Card
         flex={3}
+        variant='outlined'
         component={Box}
-        // elevation={24}
-        variant='elevation'
         display={{ xs: 'none', md: 'block' }}
         sx={{
           borderRadius: 0,
@@ -27,7 +26,7 @@ const ResponsiveSidebarWrapper: React.FC<ComponentType> = ({ page, sidebar }) =>
         }}
       >
         {sidebar}
-      </Paper>
+      </Card>
       <Box flex={9} sx={{
           background: theme.palette.background.default,
           // background: 'black',

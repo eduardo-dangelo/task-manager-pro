@@ -13,18 +13,36 @@ import useAuth from '../src/hooks/useAuth'
 const UserLinks = () => {
   const { logout, user } = useAuth()
   return (
-    <ListItem component='div' disablePadding>
+    <ListItem
+      component='div'
+      disablePadding
+      sx={{
+        alignItems: 'stretch',
+        justifyContent: 'space-between',
+      }}
+    >
       <Tooltip title='View Profile'>
-        <Link href='/profile'>
+        <Link
+          href='/profile'
+          style={{
+            display: 'flex',
+            alignItems: 'stretch',
+            flex: 1,
+          }}
+        >
           <ListItemButton
             sx={{
-              height: 56,
               padding: 0,
-              px: 0,
+              paddingLeft: '0 !important',
+              paddingRight: '0 !important',
             }}
           >
-            <ListItemIcon>
-              <Avatar component='div' sizes='small' src='/broken-image.jpg' />
+            <ListItemIcon sx={{ pl: 2 }}>
+              <Avatar
+                component='div'
+                sx={{ width: 24, height: 24 }}
+                src='/broken-image.jpg'
+              />
             </ListItemIcon>
             <ListItemText
               primary={`${user?.first_name} ${user?.last_name}`}
@@ -32,6 +50,8 @@ const UserLinks = () => {
                 color: 'primary',
                 fontWeight: 'medium',
                 variant: 'body2',
+                p: 2,
+                pl: 0,
               }}
             />
           </ListItemButton>
