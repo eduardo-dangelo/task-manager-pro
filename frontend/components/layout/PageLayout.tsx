@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
-import Sidebar from './Sidebar/Sidebar'
+import Sidebar from './sidebar/Sidebar'
 import Head from 'next/head'
-import SidebarGrid from './Sidebar/SidebarGrid'
-import useAuth from '../src/hooks/useAuth'
+import ResponsiveSidebarWrapper from './sidebar/ResponsiveSidebarWrapper'
+import useAuth from '../../src/hooks/useAuth'
 
 type ComponentType = {
   page: React.ReactNode
@@ -22,7 +22,7 @@ const PageLayout: React.FC<ComponentType> = ({ page }) => {
         <meta name='description' content='best project manager software.' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <SidebarGrid sidebar={<Sidebar />} page={page} />
+      <ResponsiveSidebarWrapper sidebar={<Sidebar />} page={page} />
     </>
   )
 }

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import PageLayout from '../components/PageLayout'
+import PageLayout from '../components/layout/PageLayout'
 import { useRouter } from 'next/router'
 import Chess from '../components/Chess'
 

@@ -3,13 +3,14 @@ import { Grid, Paper } from '@mui/material'
 import { Box } from '@mui/system'
 import BurgerDrawer from './BurgerDrawer'
 import Sidebar from './Sidebar'
+import theme from "../../../src/theme";
 
 type ComponentType = {
   page: React.ReactNode
   sidebar: React.ReactNode
 }
 
-const SidebarGrid: React.FC<ComponentType> = ({ page, sidebar }) => {
+const ResponsiveSidebarWrapper: React.FC<ComponentType> = ({ page, sidebar }) => {
   return (
     <Box sx={{ display: 'flex', height: '100vh', flexGrow: 1 }}>
       <Paper
@@ -27,7 +28,10 @@ const SidebarGrid: React.FC<ComponentType> = ({ page, sidebar }) => {
       >
         {sidebar}
       </Paper>
-      <Box flex={9}>
+      <Box flex={9} sx={{
+          background: theme.palette.background.default,
+          // background: 'black',
+      }}>
         <BurgerDrawer>{sidebar}</BurgerDrawer>
         {page}
       </Box>
@@ -35,4 +39,4 @@ const SidebarGrid: React.FC<ComponentType> = ({ page, sidebar }) => {
   )
 }
 
-export default SidebarGrid
+export default ResponsiveSidebarWrapper

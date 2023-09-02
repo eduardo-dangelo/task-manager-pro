@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import PageLayout from '../../components/PageLayout'
+import PageLayout from '../../components/layout/PageLayout'
 import { Box, Typography } from '@mui/material'
 import useProject from '../../src/hooks/useProject'
 import { useRouter } from 'next/router'
