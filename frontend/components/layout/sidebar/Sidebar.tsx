@@ -2,7 +2,7 @@ import * as React from 'react'
 import { styled } from '@mui/material/styles'
 import List from '@mui/material/List'
 import Logo from '../../Logo'
-import DynamicList from '../../DynamicList/DynamicList'
+import DynamicList from '../../dynamicList/DynamicList'
 import Link from 'next/link'
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined'
 import useProjects from '../../../src/hooks/useProjects'
@@ -34,8 +34,10 @@ const Sidebar = () => {
         <Logo />
       </Link>
       <Divider />
+
       <UserLinks />
       <Divider />
+
       <DynamicList
         list={projects?.map((project) => ({
           id: project?.id,
@@ -43,7 +45,7 @@ const Sidebar = () => {
           icon: <DescriptionOutlinedIcon />,
           route: `/project/${project?.id}`,
         }))}
-        title='PROJECTS'
+        title='Projects'
         newItemIcon={<DescriptionOutlinedIcon />}
         onAdd={createProject}
         onUpdate={updateProject}

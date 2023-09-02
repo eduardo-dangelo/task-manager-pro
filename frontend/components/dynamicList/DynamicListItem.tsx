@@ -10,7 +10,9 @@ import Link from 'next/link'
 import { ListItemType } from '../../src/types'
 import theme from '../../src/theme'
 import { useRouter } from 'next/router'
-import { HeadShake, Jump, Pulse, Reveal, Slide } from '../../src/animations'
+import { HeadShake, Jump, Pulse, Reveal, Fade } from '../../src/animations'
+import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined'
+import DescriptionIcon from '@mui/icons-material/Description'
 
 type ComponentType = {
   item: ListItemType
@@ -31,17 +33,12 @@ const DynamicListItem: React.FC<ComponentType> = ({
   const [editMode, setEditMode] = useState(false)
   const router = useRouter()
 
-  const visibleOnHover = {
+  const visibleOnHover = (selected: boolean) => ({
     '& .hidden-button': {
-      opacity: 0,
       transition: '.2s ease',
+      display: selected ? 'block' : 'none',
     },
-    '&:hover': {
-      '.hidden-button': {
-        opacity: 1,
-      },
-    },
-  }
+  })
 
   const handleDismissClick = () => {
     setEditMode(false)
@@ -78,16 +75,17 @@ const DynamicListItem: React.FC<ComponentType> = ({
       <ListItemButton
         sx={{
           py: 0.5,
-          mb: 0.5,
-          paddingLeft: '1rem !important',
+          paddingLeft: '1.2rem !important',
           paddingRight: '0 !important',
           minHeight: 32,
-          borderRadius: 2,
-          background: selected ? `${theme.palette.primary.main} !important` : 'auto',
-          color: selected ? 'white' : 'auto',
-          ...visibleOnHover,
-          '&:hover svg': {
-            color: selected ? 'inherit' : 'secondary.main',
+          color: selected ? `${theme.palette.primary.main} !important` : 'auto',
+          '& .hidden-button': {
+            display: selected ? 'block' : 'none',
+            opacity: 0,
+            transition: '.2s ease',
+          },
+          '&:hover .hidden-button': {
+            opacity: 1,
           },
         }}
       >
@@ -98,25 +96,28 @@ const DynamicListItem: React.FC<ComponentType> = ({
               paddingLeft: 0,
             }}
           >
-            {item?.icon}
+            {selected ? <DescriptionIcon /> : <DescriptionOutlinedIcon />}
           </ListItemIcon>
         </Pulse>
         <ListItemText
           primary={item?.title}
           primaryTypographyProps={{
-            fontWeight: '100',
+            // fontWeight: '100',
             fontSize: '0.95rem',
           }}
         />
         {!staticMode && (
-          <Pulse when={selected}>
+          <Fade when={selected}>
             <IconButton
               className='hidden-button'
               edge='end'
               aria-label='edit'
               size='small'
               color='inherit'
-              sx={{ mr: 0.2, color: selected ? 'inherit' : 'primary.main' }}
+              sx={{
+                mr: 0.2,
+                py: 0,
+              }}
               onClick={() => setEditMode(true)}
             >
               <EditIcon fontSize='small' />
@@ -124,9 +125,13 @@ const DynamicListItem: React.FC<ComponentType> = ({
             <TrashButton
               className='hidden-button'
               onDelete={onDelete}
-              sx={{ color: selected ? 'inherit' : 'primary.main' }}
+              sx={{
+                // color: selected ? 'inherit' : 'primary.main',
+                color: 'text.danger',
+                py: 0,
+              }}
             />
-          </Pulse>
+          </Fade>
         )}
       </ListItemButton>
     </Link>

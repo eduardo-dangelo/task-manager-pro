@@ -9,6 +9,8 @@ import AddListItem from './AddListItem'
 import { ListItemType, ProjectType } from '../../src/types'
 import DynamicListItem from './DynamicListItem'
 import { Pulse } from '../../src/animations'
+import theme from '../../src/theme'
+import { DynamicListTitle } from './DynamicListTitle'
 
 const rotate90IconStyle = {
   '& svg': {
@@ -55,6 +57,7 @@ const DynamicList: React.FC<ComponentType> = ({
 
   const handleAddIconClick = () => {
     setIsAdding(!isAdding)
+    setOpen(true)
   }
 
   const handleAddItem = (title: string) => {
@@ -80,37 +83,31 @@ const DynamicList: React.FC<ComponentType> = ({
   }
 
   return (
-    <Box sx={{ pb: open ? 2 : 0 }}>
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          // mt: 5,
-          mb: 1,
-          position: 'relative',
-        }}
-      >
+    <Box
+      sx={{
+        bgcolor: open ? theme.palette.background.default : null,
+        color: 'text.secondary',
+      }}
+    >
+      <ListItem component='div' disablePadding>
         {title && (
-          <Typography
-            onClick={handleToggleList}
-            sx={{
-              fontSize: '0.9rem',
-              cursor: 'pointer',
-              opacity: 0.5,
-            }}
-          >
-            {title}
-          </Typography>
+          <DynamicListTitle onClick={handleToggleList} title={title} open={open} />
         )}
         {!staticMode && (
-          <Tooltip title='New Project'>
-            <IconButton onClick={handleAddIconClick} size='large' sx={rotate90IconStyle}>
+          <Tooltip arrow title='New Project' placement='right'>
+            <IconButton
+              onClick={handleAddIconClick}
+              size='large'
+              sx={{
+                mx: 0.5,
+                ...rotate90IconStyle,
+              }}
+            >
               <AddCircleOutlineIcon />
             </IconButton>
           </Tooltip>
         )}
-      </Box>
+      </ListItem>
       <TransitionGroup>
         {open &&
           list.map((item, index) => (

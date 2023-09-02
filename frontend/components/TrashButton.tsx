@@ -1,5 +1,5 @@
 import React from 'react'
-import DeleteIcon from '@mui/icons-material/Delete'
+import DeleteIcon from '@mui/icons-material/DeleteOutline'
 import { IconButton, SxProps, Theme } from '@mui/material'
 
 type ComponentType = {
@@ -18,7 +18,7 @@ const TrashButton: React.FC<ComponentType> = ({ onDelete, ...props }) => {
       sx={{ mr: 0.5, ...props?.sx }}
       onClick={onDelete}
       className={props?.className}
-      color='inherit'
+      color='warning'
     >
       <DeleteIcon fontSize='small' />
     </IconButton>

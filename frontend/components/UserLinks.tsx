@@ -9,6 +9,7 @@ import LogoutIcon from '@mui/icons-material/Logout'
 import ArrowRight from '@mui/icons-material/ArrowRight'
 import Link from 'next/link'
 import useAuth from '../src/hooks/useAuth'
+import Zoom from '@mui/material/Zoom'
 
 const UserLinks = () => {
   const { logout, user } = useAuth()
@@ -21,7 +22,12 @@ const UserLinks = () => {
         justifyContent: 'space-between',
       }}
     >
-      <Tooltip title='View Profile'>
+      <Tooltip
+        arrow
+        title='View Profile'
+        TransitionComponent={Zoom}
+        placement='bottom-end'
+      >
         <Link
           href='/profile'
           style={{
@@ -57,7 +63,7 @@ const UserLinks = () => {
           </ListItemButton>
         </Link>
       </Tooltip>
-      <Tooltip title='Log Out'>
+      <Tooltip arrow title='Log Out' placement='right'>
         <IconButton
           onClick={logout}
           size='large'

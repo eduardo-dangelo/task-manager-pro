@@ -6,7 +6,7 @@ import { Box } from '@mui/material'
 
 const Logo = () => {
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center', p: 2 }}>
+    <Box sx={{ display: 'flex', alignItems: 'center', px: 2, py: 2.5 }}>
       <ListItemIcon sx={{ fontSize: 20, display: 'flex', alignItems: 'center' }}>
         <AssignmentTurnedInRoundedIcon color='secondary' fontSize='large' />️
       </ListItemIcon>

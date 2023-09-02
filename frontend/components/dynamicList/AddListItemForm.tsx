@@ -89,7 +89,7 @@ const AddListItemForm: React.FC<ComponentType> = ({
           onBlur,
           endAdornment: (
             <InputAdornment position='end'>
-              <Tooltip title={scope === 'create' ? 'Add' : 'Save'}>
+              <Tooltip arrow title={scope === 'create' ? 'Add' : 'Save'}>
                 <IconButton
                   aria-label='toggle password visibility'
                   onClick={handleAddItem}
