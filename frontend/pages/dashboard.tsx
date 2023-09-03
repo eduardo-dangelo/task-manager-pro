@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
-import PageLayout from '../components/layout/PageLayout'
+import PageLayout from '../src/components/layout/PageLayout'
 import { useRouter } from 'next/router'
-import Chess from '../components/Chess'
+import Chess from '../src/components/Chess'
 
 const Dashboard = () => {
   const router = useRouter()

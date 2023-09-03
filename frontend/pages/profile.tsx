@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import PageLayout from '../components/layout/PageLayout'
-import Dashboard from './dashboard'
-import ProfilePage from '../components/modules/profile/ProfilePage'
+import PageLayout from '../src/components/layout/PageLayout'
+import ProfilePage from '../src/modules/profile/ProfilePage'
 
 const Profile = () => {
   const router = useRouter()

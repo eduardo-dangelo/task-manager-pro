@@ -40,6 +40,7 @@ export default function useAuth() {
   const router = useRouter()
   const {
     user,
+    profile,
     error,
     isAuthenticated,
     isLoading,
@@ -61,9 +62,14 @@ export default function useAuth() {
         } | null
         hasRequestedPasswordReset: boolean
         hasResetPassword: boolean
+        profile?: {
+          image: string
+          theme: 'light' | 'dark'
+        }
       }
     }) => ({
       user: state?.auth?.user,
+      profile: state?.auth?.profile,
       token: state?.auth?.token,
       isAuthenticated: state?.auth?.isAuthenticated,
       isLoading: state?.auth?.isLoading,
@@ -235,6 +241,7 @@ export default function useAuth() {
 
   return {
     user,
+    profile,
     error,
     isAuthenticated,
     isLoading,

@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography'
 import { Container, CssBaseline } from '@mui/material'
 import Copyright from '../Copyright'
 import Link from 'next/link'
-import useAuth, { LoginFormType } from '../../src/hooks/useAuth'
+import useAuth, { LoginFormType } from '../../hooks/useAuth'
 // @ts-ignore
 import LoadingButton from '@mui/lab/LoadingButton'
 import { useEffect, useState } from 'react'
@@ -124,10 +124,10 @@ const LogInForm = () => {
           </LoadingButton>
           <Grid container>
             <Grid item xs>
-              <Link href='/forgot-password'>Forgot password?</Link>
+              <Link href='/frontend/pages/forgot-password'>Forgot password?</Link>
             </Grid>
             <Grid item>
-              <Link href='/register'>
+              <Link href='/frontend/pages/register'>
                 {/* eslint-disable-next-line react/no-unescaped-entities */}
                 Don't have an account? Sign Up
               </Link>

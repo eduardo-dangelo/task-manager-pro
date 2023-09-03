@@ -3,7 +3,7 @@ import Button from '@mui/material/Button'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import { Chip } from '@mui/material'
-import { StatusType } from '../src/types'
+import { StatusType } from '../types'
 
 const statusOptions = [
   { label: 'Initiated', value: 'IN' },

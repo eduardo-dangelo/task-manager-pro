@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { InputAdornment, SxProps, TextField, Theme, Tooltip } from '@mui/material'
 import IconButton from '@mui/material/IconButton'
 import AddIcon from '@mui/icons-material/Add'
-import { AddItemScopeTypes } from '../../src/types'
-import { HeadShake } from '../../src/animations'
+import { AddItemScopeTypes } from '../../types'
+import { HeadShake } from '../../animations'
 import SaveIcon from '@mui/icons-material/Save'
 
 const rotate90IconStyle = {

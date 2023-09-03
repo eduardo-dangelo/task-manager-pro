@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
-import PageLayout from '../../components/layout/PageLayout'
+import PageLayout from '../../src/components/layout/PageLayout'
 import { Box, Typography } from '@mui/material'
 import useProject from '../../src/hooks/useProject'
 import { useRouter } from 'next/router'
-import StatusSelect from '../../components/StatusSelect'
+import StatusSelect from '../../src/components/StatusSelect'
 
 const ProjectPage = () => {
   const { query } = useRouter()

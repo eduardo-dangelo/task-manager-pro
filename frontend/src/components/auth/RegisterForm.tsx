@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import Copyright from '../Copyright'
 import Link from 'next/link'
-import useAuth, { RegisterFormType } from '../../src/hooks/useAuth'
+import useAuth, { RegisterFormType } from '../../hooks/useAuth'
 import LoadingButton from '@mui/lab/LoadingButton'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
@@ -168,7 +168,7 @@ export default function RegisterForm() {
           </LoadingButton>
           <Grid container justifyContent='flex-end'>
             <Grid item>
-              <Link href='/login'>Already have an account? Sign in</Link>
+              <Link href='/frontend/pages/login'>Already have an account? Sign in</Link>
             </Grid>
           </Grid>
         </Box>

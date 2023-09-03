@@ -10,10 +10,7 @@ import Typography from '@mui/material/Typography'
 import { Button, Container, CssBaseline } from '@mui/material'
 import Copyright from '../Copyright'
 import Link from 'next/link'
-import useAuth, {
-  LoginFormType,
-  ResetPasswordConfirmFormType,
-} from '../../src/hooks/useAuth'
+import useAuth, { LoginFormType, ResetPasswordConfirmFormType } from '../../hooks/useAuth'
 // @ts-ignore
 import LoadingButton from '@mui/lab/LoadingButton'
 import { useEffect, useState } from 'react'

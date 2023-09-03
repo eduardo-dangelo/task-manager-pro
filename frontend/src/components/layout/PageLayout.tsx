@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import Sidebar from './sidebar/Sidebar'
 import Head from 'next/head'
 import ResponsiveSidebarWrapper from './sidebar/ResponsiveSidebarWrapper'
-import useAuth from '../../src/hooks/useAuth'
+import useAuth from '../../hooks/useAuth'
 
 type ComponentType = {
   page: React.ReactNode

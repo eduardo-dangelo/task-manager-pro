@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import { ListItem } from '@mui/material'
 import AddListItemForm from './AddListItemForm'
-import { AddItemScopeTypes, ListItemType } from '../../src/types'
-import { Jump, Pulse, Reveal, Fade } from '../../src/animations'
-import theme from '../../src/theme'
+import { AddItemScopeTypes, ListItemType } from '../../types'
+import { Jump, Pulse, Reveal, Fade } from '../../animations'
+import theme from '../../theme'
 
 type ComponentType = {
   onAdd: (value: string) => void

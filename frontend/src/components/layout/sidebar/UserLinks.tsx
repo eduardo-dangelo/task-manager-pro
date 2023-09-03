@@ -8,11 +8,20 @@ import IconButton from '@mui/material/IconButton'
 import LogoutIcon from '@mui/icons-material/Logout'
 import ArrowRight from '@mui/icons-material/ArrowRight'
 import Link from 'next/link'
-import useAuth from '../../../src/hooks/useAuth'
+import useAuth from '../../../hooks/useAuth'
 import Zoom from '@mui/material/Zoom'
+import { useRouter } from 'next/router'
 
 const UserLinks = () => {
-  const { logout, user } = useAuth()
+  const { route } = useRouter()
+  const { logout, user, loadUser } = useAuth()
+
+  React.useEffect(() => {
+    if (!user?.id) {
+      loadUser(route)
+    }
+  }, [route])
+
   return (
     <ListItem
       component='div'

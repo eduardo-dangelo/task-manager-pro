@@ -12,7 +12,7 @@ import Link from 'next/link'
 import useAuth, {
   RegisterFormType,
   ResetPasswordRequestFormType,
-} from '../../src/hooks/useAuth'
+} from '../../hooks/useAuth'
 import { useState } from 'react'
 import ThumbUpIcon from '@mui/icons-material/ThumbUp'
 
@@ -94,7 +94,7 @@ const ForgotPasswordForm = () => {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href='/login'>Login</Link>
+                <Link href='/frontend/pages/login'>Login</Link>
               </Grid>
             </Grid>
 

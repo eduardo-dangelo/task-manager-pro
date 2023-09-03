@@ -6,10 +6,10 @@ import { Collapse, ListItem, Typography } from '@mui/material'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
 import { TransitionGroup } from 'react-transition-group'
 import AddListItem from './AddListItem'
-import { ListItemType, ProjectType } from '../../src/types'
+import { ListItemType, ProjectType } from '../../types'
 import DynamicListItem from './DynamicListItem'
-import { Pulse } from '../../src/animations'
-import theme from '../../src/theme'
+import { Pulse } from '../../animations'
+import theme from '../../theme'
 import { DynamicListTitle } from './DynamicListTitle'
 
 const rotate90IconStyle = {

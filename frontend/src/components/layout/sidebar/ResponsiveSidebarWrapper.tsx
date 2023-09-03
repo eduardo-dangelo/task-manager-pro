@@ -3,7 +3,7 @@ import { Card, Grid, Paper } from '@mui/material'
 import { Box } from '@mui/system'
 import BurgerDrawer from './BurgerDrawer'
 import Sidebar from './Sidebar'
-import theme from '../../../src/theme'
+import theme from '../../../theme'
 
 type ComponentType = {
   page: React.ReactNode

@@ -5,7 +5,7 @@ import Logo from '../../Logo'
 import DynamicList from '../../dynamicList/DynamicList'
 import Link from 'next/link'
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined'
-import useProjects from '../../../src/hooks/useProjects'
+import useProjects from '../../../hooks/useProjects'
 import { Divider } from '@mui/material'
 import UserLinks from './UserLinks'
 

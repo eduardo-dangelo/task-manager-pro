@@ -50,6 +50,7 @@ export default function (
         ...state,
         user: action.payload.user,
         token: action.payload.token,
+        profile: action.payload.profile,
         isLoading: false,
         isAuthenticated: true,
         hasResetPassword: false,
