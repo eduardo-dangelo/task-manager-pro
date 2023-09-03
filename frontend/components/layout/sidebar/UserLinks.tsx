@@ -8,7 +8,7 @@ import IconButton from '@mui/material/IconButton'
 import LogoutIcon from '@mui/icons-material/Logout'
 import ArrowRight from '@mui/icons-material/ArrowRight'
 import Link from 'next/link'
-import useAuth from '../src/hooks/useAuth'
+import useAuth from '../../../src/hooks/useAuth'
 import Zoom from '@mui/material/Zoom'
 
 const UserLinks = () => {

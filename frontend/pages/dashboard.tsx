@@ -10,6 +10,7 @@ const Dashboard = () => {
       router.push('/login')
     }
   }, [])
+
   return (
     <div>
       <Chess />

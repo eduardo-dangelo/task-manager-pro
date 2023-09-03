@@ -7,7 +7,7 @@ import Link from 'next/link'
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined'
 import useProjects from '../../../src/hooks/useProjects'
 import { Divider } from '@mui/material'
-import UserLinks from '../../UserLinks'
+import UserLinks from './UserLinks'
 
 const FireNav = styled(List)({
   '& .MuiListItemButton-root': {

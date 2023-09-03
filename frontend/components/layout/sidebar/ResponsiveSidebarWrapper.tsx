@@ -1,9 +1,9 @@
 import React from 'react'
-import {Card, Grid, Paper} from '@mui/material'
+import { Card, Grid, Paper } from '@mui/material'
 import { Box } from '@mui/system'
 import BurgerDrawer from './BurgerDrawer'
 import Sidebar from './Sidebar'
-import theme from "../../../src/theme";
+import theme from '../../../src/theme'
 
 type ComponentType = {
   page: React.ReactNode
@@ -27,10 +27,14 @@ const ResponsiveSidebarWrapper: React.FC<ComponentType> = ({ page, sidebar }) =>
       >
         {sidebar}
       </Card>
-      <Box flex={9} sx={{
+      <Box
+        flex={9}
+        sx={{
           background: theme.palette.background.default,
+          overflow: 'auto',
           // background: 'black',
-      }}>
+        }}
+      >
         <BurgerDrawer>{sidebar}</BurgerDrawer>
         {page}
       </Box>
