@@ -1,8 +1,8 @@
-from rest_framework import generics, permissions, status, views
+from rest_framework import generics, permissions, status, views, viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from knox.models import AuthToken
-from .serializers import ProfileSerializer, UserSerializer, RegisterSerializer, LoginSerializer, UpdateUserSerializer
+from .serializers import UserSerializer, RegisterSerializer, LoginSerializer, UpdateUserSerializer
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 
@@ -28,7 +28,6 @@ class LoginAPI(generics.GenericAPIView):
         user = serializer.validated_data
         return Response({
             "user": UserSerializer(user, context=self.get_serializer_context()).data,
-            "profile": ProfileSerializer(user.profile, context=self.get_serializer_context()).data,
             "token": AuthToken.objects.create(user)[1]
         })
 

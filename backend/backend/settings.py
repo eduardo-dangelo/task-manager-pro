@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'knox',
     'accounts',
+    'profiles',
     'django_rest_passwordreset',
 ]
 

@@ -18,6 +18,7 @@ from task_manager import views
 from django.urls import path, include
 from rest_framework import routers
 from accounts.api import RegisterAPI
+from profiles.views import ProfileViewSet
 
 router = routers.DefaultRouter()
 router.register(r'projects', views.ProjectViewSet, 'project')
@@ -26,6 +27,7 @@ router.register(r'tasks', views.TaskViewSet, 'task')
 router.register(r'sprints', views.SprintViewSet, 'sprints')
 router.register(r'checklists', views.ChecklistViewSet, 'checklists')
 router.register(r'notes', views.NoteViewSet, 'notes')
+router.register(r'profiles', ProfileViewSet, 'profile')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
