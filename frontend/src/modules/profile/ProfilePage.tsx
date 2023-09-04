@@ -6,8 +6,15 @@ import UpdateAccountDetails from './UpdateAccountDetails'
 import ThemeSwitch from '../../components/ThemeSwitch'
 import MarketingPreferenceSwitch from '../../components/MarketingPreferenceSwitch'
 import ProfilePictureEdit from '../../components/ProfilePictureEdit'
+import useAuth from '../../hooks/useAuth'
 
 const ProfilePage = () => {
+  const { profile, getProfile, user } = useAuth()
+
+  React.useEffect(() => {
+    getProfile(user.id)
+  }, [])
+
   return (
     <Grid container spacing={3} xs={12} ml={0} mt={0} pr={3}>
       <Grid item sm={12} md={6}>

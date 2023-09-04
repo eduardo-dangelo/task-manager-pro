@@ -124,10 +124,10 @@ const LogInForm = () => {
           </LoadingButton>
           <Grid container>
             <Grid item xs>
-              <Link href='/frontend/pages/forgot-password'>Forgot password?</Link>
+              <Link href='forgot-password'>Forgot password?</Link>
             </Grid>
             <Grid item>
-              <Link href='/frontend/pages/register'>
+              <Link href='register'>
                 {/* eslint-disable-next-line react/no-unescaped-entities */}
                 Don't have an account? Sign Up
               </Link>

@@ -6,6 +6,7 @@ const initialState = {
   error: null,
   hasRequestedPasswordReset: false,
   hasResetPassword: false,
+  profile: null,
 }
 
 export type actionTypes =
@@ -23,7 +24,8 @@ export type actionTypes =
   | 'REQUEST_PASSWORD_RESET_FAIL'
   | 'CONFIRM_PASSWORD_RESET_SUCCESS'
   | 'CONFIRM_PASSWORD_RESET_FAIL'
-
+  | 'USER_PROFILE_LOADED'
+  | 'UPDATE_USER_PROFILE_SUCCESS'
 export default function (
   state = initialState,
   action: { payload?: any; type: actionTypes },
@@ -60,6 +62,12 @@ export default function (
       return {
         ...state,
         user: action.payload.user,
+        isLoading: false,
+      }
+    case 'USER_PROFILE_LOADED':
+      return {
+        ...state,
+        profile: action.payload,
         isLoading: false,
       }
     case 'AUTH_ERROR':

@@ -64,7 +64,7 @@ export default function useAuth() {
         hasResetPassword: boolean
         profile?: {
           image: string
-          theme: 'light' | 'dark'
+          theme: 'Light' | 'Dark'
         }
       }
     }) => ({
@@ -190,6 +190,24 @@ export default function useAuth() {
       })
   }
 
+  const updateUserProfile = ({ theme, image, id }) => {
+    dispatch({ type: 'USER_LOADING' })
+    const body = JSON.stringify({ theme, image, id })
+
+    axios
+      .put(`http://localhost:8000/api/auth/profile/${id}`, body, tokenConfig(token))
+      .then((res) => {
+        dispatch({
+          type: 'UPDATE_USER_PROFILE_SUCCESS',
+          payload: res.data,
+        })
+        console.log('res', res)
+      })
+      .catch((error) => {
+        console.log('error', error)
+      })
+  }
+
   const resetPasswordRequest = ({ email }: ResetPasswordRequestFormType) => {
     const config = {
       headers: {
@@ -239,6 +257,29 @@ export default function useAuth() {
       })
   }
 
+  const getProfile = (id) => {
+    axios
+      .get(`http://localhost:8000/api/profiles/${id}/`, tokenConfig(token))
+      .then((res) => {
+        dispatch({
+          type: 'USER_PROFILE_LOADED',
+          payload: res.data,
+        })
+      })
+  }
+
+  const updateProfile = (data) => {
+    console.log('data', data)
+    axios
+      .put(`http://localhost:8000/api/profiles/${data.id}/`, data, tokenConfig(token))
+      .then((res) => {
+        dispatch({
+          type: 'USER_PROFILE_LOADED',
+          payload: res.data,
+        })
+      })
+  }
+
   return {
     user,
     profile,
@@ -255,5 +296,8 @@ export default function useAuth() {
     hasResetPassword,
     resetPasswordRequest,
     resetPasswordConfirm,
+    updateUserProfile,
+    getProfile,
+    updateProfile,
   }
 }

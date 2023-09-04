@@ -94,7 +94,7 @@ const ForgotPasswordForm = () => {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href='/frontend/pages/login'>Login</Link>
+                <Link href='login'>Login</Link>
               </Grid>
             </Grid>
 

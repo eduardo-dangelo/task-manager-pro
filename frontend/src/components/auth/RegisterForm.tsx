@@ -168,7 +168,7 @@ export default function RegisterForm() {
           </LoadingButton>
           <Grid container justifyContent='flex-end'>
             <Grid item>
-              <Link href='/frontend/pages/login'>Already have an account? Sign in</Link>
+              <Link href='login'>Already have an account? Sign in</Link>
             </Grid>
           </Grid>
         </Box>
