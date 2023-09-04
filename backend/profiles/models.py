@@ -6,7 +6,7 @@ class Profile(models.Model):
     bio = models.TextField(blank=True, null=True)
     profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
     theme = models.CharField(max_length=20, default='light')
-    marketing_preference = models.BooleanField(default=False)
+    marketing_preference = models.BooleanField(default=False, blank=True, null=True)
 
     def __str__(self):
         return f'{self.user.username} Profile'

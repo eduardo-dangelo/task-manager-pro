@@ -3,7 +3,7 @@ import { Avatar, Badge, Box, Typography } from '@mui/material'
 import IconButton from '@mui/material/IconButton'
 import { PhotoCamera } from '@mui/icons-material'
 
-const ProfilePictureEdit = () => {
+export const ProfilePicture = () => {
   return (
     <Box mb={3}>
       <Badge
@@ -27,5 +27,3 @@ const ProfilePictureEdit = () => {
     </Box>
   )
 }
-
-export default ProfilePictureEdit

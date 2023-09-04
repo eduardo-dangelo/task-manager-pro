@@ -6,6 +6,9 @@ import PageLayout from '../src/components/layout/PageLayout'
 import { Provider } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { store } from '../src/store'
+import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query'
+
+const queryClient = new QueryClient()
 
 export default function App({ Component, pageProps }: AppProps) {
   const [showChild, setShowChild] = useState(false)
@@ -22,9 +25,11 @@ export default function App({ Component, pageProps }: AppProps) {
   const getLayout = Component.getLayout || ((page) => page)
   return (
     <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        {getLayout(<Component {...pageProps} />)}
-      </ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={theme}>
+          {getLayout(<Component {...pageProps} />)}
+        </ThemeProvider>
+      </QueryClientProvider>
     </Provider>
   )
 }

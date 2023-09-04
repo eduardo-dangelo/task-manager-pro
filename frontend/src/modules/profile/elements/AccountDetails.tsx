@@ -6,12 +6,12 @@ import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
-import { MaterialUISwitch } from '../../components/MaterialUISwitch'
+import { MaterialUISwitch } from '../../../components/MaterialUISwitch'
 import Button from '@mui/material/Button'
-import useAuth from '../../hooks/useAuth'
+import useAuth from '../../../hooks/useAuth'
 import { useFormik } from 'formik'
 
-const UpdateAccountDetails = () => {
+export const AccountDetails = () => {
   const { user } = useAuth()
   const { values, setFieldValue } = useFormik({
     initialValues: {
@@ -73,5 +73,3 @@ const UpdateAccountDetails = () => {
     </Box>
   )
 }
-
-export default UpdateAccountDetails

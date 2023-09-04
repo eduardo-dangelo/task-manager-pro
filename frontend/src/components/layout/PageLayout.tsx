@@ -9,12 +9,6 @@ type ComponentType = {
 }
 
 const PageLayout: React.FC<ComponentType> = ({ page }) => {
-  // const { loadUser } = useAuth()
-  //
-  // useEffect(() => {
-  //   loadUser()
-  // }, [])
-
   return (
     <>
       <Head>

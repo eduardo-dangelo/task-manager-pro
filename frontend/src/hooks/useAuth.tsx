@@ -89,7 +89,7 @@ export default function useAuth() {
           type: 'USER_LOADED',
           payload: res.data,
         })
-        router.push(route)
+        route && router.push(route)
       })
       .catch((error) => {
         dispatch({

@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 
-const UpdatePasswordForm = () => {
+export const UpdatePassword = () => {
   return (
     <Box component='form' noValidate onSubmit={() => {}}>
       <Typography mb={2}>Update Password</Typography>
@@ -42,5 +42,3 @@ const UpdatePasswordForm = () => {
     </Box>
   )
 }
-
-export default UpdatePasswordForm
