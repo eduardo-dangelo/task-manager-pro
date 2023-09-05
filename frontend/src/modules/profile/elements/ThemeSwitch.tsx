@@ -1,5 +1,5 @@
 import React from 'react'
-import { MaterialUISwitch } from '../../../components/MaterialUISwitch'
+import { MaterialUISwitch } from '../../../common/MaterialUISwitch'
 import useAuth from '../../../hooks/useAuth'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import { useQueryClient } from '@tanstack/react-query'

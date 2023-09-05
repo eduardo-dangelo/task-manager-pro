@@ -1,5 +1,5 @@
 import styles from '../styles/Home.module.css'
-import PageLayout from '../src/components/layout/PageLayout'
+import { PageLayout } from '@common/layout'
 
 const Home = () => {
   return (

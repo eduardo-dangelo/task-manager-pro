@@ -1,21 +1,9 @@
 import React, { useEffect } from 'react'
-import PageLayout from '../src/components/layout/PageLayout'
+import { PageLayout } from '@common/layout'
 import { useRouter } from 'next/router'
-import Chess from '../src/components/Chess'
 
 const Dashboard = () => {
-  const router = useRouter()
-  useEffect(() => {
-    if (!localStorage.token) {
-      router.push('/login')
-    }
-  }, [])
-
-  return (
-    <div>
-      <Chess />
-    </div>
-  )
+  return <div>dashboard</div>
 }
 
 Dashboard.getLayout = (page: React.ReactNode) => {

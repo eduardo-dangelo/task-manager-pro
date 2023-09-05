@@ -7,7 +7,7 @@ type ComponentType = {
   children: React.ReactNode
 }
 
-const BurgerDrawer: React.FC<ComponentType> = ({ children }) => {
+export const BurgerDrawer: React.FC<ComponentType> = ({ children }) => {
   const [open, setOpen] = useState(false)
   return (
     <Box display={{ xs: 'block', md: 'none' }}>
@@ -34,5 +34,3 @@ const BurgerDrawer: React.FC<ComponentType> = ({ children }) => {
     </Box>
   )
 }
-
-export default BurgerDrawer

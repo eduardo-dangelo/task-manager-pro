@@ -1,5 +1,5 @@
 import React from 'react'
-import LogInForm from '../src/components/auth/LogInForm'
+import LogInForm from '../src/modules/auth/LogInForm'
 
 const Login = () => {
   return <LogInForm />

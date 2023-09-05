@@ -2,11 +2,7 @@ import React from 'react'
 import { Box, Card, Typography } from '@mui/material'
 import Grid from '@mui/material/Grid'
 import useAuth from '../../hooks/useAuth'
-import {
-  useCreateProfile,
-  useGetProfile,
-  useUpdateProfile,
-} from '../../react-query/profile'
+import { useCreateProfile, useGetProfile, useUpdateProfile } from '@react-query/profile'
 import {
   AccountDetails,
   MarketingPreferenceSwitch,

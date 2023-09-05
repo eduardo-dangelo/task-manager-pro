@@ -1,16 +1,15 @@
 import React from 'react'
-import { Card, Grid, Paper } from '@mui/material'
+import { Card } from '@mui/material'
 import { Box } from '@mui/system'
-import BurgerDrawer from './BurgerDrawer'
-import Sidebar from './Sidebar'
 import theme from '../../../theme'
+import { BurgerDrawer } from '@common/layout'
 
 type ComponentType = {
   page: React.ReactNode
   sidebar: React.ReactNode
 }
 
-const ResponsiveSidebarWrapper: React.FC<ComponentType> = ({ page, sidebar }) => {
+export const ResponsiveSidebarWrapper: React.FC<ComponentType> = ({ page, sidebar }) => {
   return (
     <Box sx={{ display: 'flex', height: '100vh', flexGrow: 1 }}>
       <Card
@@ -32,7 +31,6 @@ const ResponsiveSidebarWrapper: React.FC<ComponentType> = ({ page, sidebar }) =>
         sx={{
           background: theme.palette.background.default,
           overflow: 'auto',
-          // background: 'black',
         }}
       >
         <BurgerDrawer>{sidebar}</BurgerDrawer>
@@ -41,5 +39,3 @@ const ResponsiveSidebarWrapper: React.FC<ComponentType> = ({ page, sidebar }) =>
     </Box>
   )
 }
-
-export default ResponsiveSidebarWrapper

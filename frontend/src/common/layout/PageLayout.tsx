@@ -1,14 +1,21 @@
 import React, { useEffect } from 'react'
-import Sidebar from './sidebar/Sidebar'
 import Head from 'next/head'
-import ResponsiveSidebarWrapper from './sidebar/ResponsiveSidebarWrapper'
-import useAuth from '../../hooks/useAuth'
+import { useRouter } from 'next/router'
+import { ResponsiveSidebarWrapper, Sidebar } from '@common/layout'
 
 type ComponentType = {
   page: React.ReactNode
 }
 
-const PageLayout: React.FC<ComponentType> = ({ page }) => {
+export const PageLayout: React.FC<ComponentType> = ({ page }) => {
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!localStorage.token) {
+      router.push('/login')
+    }
+  }, [])
+
   return (
     <>
       <Head>
@@ -20,5 +27,3 @@ const PageLayout: React.FC<ComponentType> = ({ page }) => {
     </>
   )
 }
-
-export default PageLayout

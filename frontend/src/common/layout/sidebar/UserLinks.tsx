@@ -12,7 +12,7 @@ import useAuth from '../../../hooks/useAuth'
 import Zoom from '@mui/material/Zoom'
 import { useRouter } from 'next/router'
 
-const UserLinks = () => {
+export const UserLinks = () => {
   const { route } = useRouter()
   const { logout, user, loadUser } = useAuth()
 
@@ -110,5 +110,3 @@ const UserLinks = () => {
     </ListItem>
   )
 }
-
-export default UserLinks

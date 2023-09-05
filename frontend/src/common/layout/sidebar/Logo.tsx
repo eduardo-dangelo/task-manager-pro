@@ -4,7 +4,7 @@ import AssignmentTurnedInRoundedIcon from '@mui/icons-material/AssignmentTurnedI
 import ListItemText from '@mui/material/ListItemText'
 import { Box } from '@mui/material'
 
-const Logo = () => {
+export const Logo = () => {
   return (
     <Box sx={{ display: 'flex', alignItems: 'center', px: 2, py: 2.5 }}>
       <ListItemIcon sx={{ fontSize: 20, display: 'flex', alignItems: 'center' }}>
@@ -22,5 +22,3 @@ const Logo = () => {
     </Box>
   )
 }
-
-export default Logo

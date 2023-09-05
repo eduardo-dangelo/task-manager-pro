@@ -1,13 +1,12 @@
 import * as React from 'react'
 import { styled } from '@mui/material/styles'
 import List from '@mui/material/List'
-import Logo from '../../Logo'
 import DynamicList from '../../dynamicList/DynamicList'
 import Link from 'next/link'
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined'
 import useProjects from '../../../hooks/useProjects'
 import { Divider } from '@mui/material'
-import UserLinks from './UserLinks'
+import { UserLinks, Logo } from '@common/layout'
 
 const FireNav = styled(List)({
   '& .MuiListItemButton-root': {
@@ -25,7 +24,7 @@ const FireNav = styled(List)({
   paddingBottom: 0,
 })
 
-const Sidebar = () => {
+export const Sidebar = () => {
   const { projects, createProject, updateProject, deleteProject } = useProjects()
 
   return (
@@ -54,5 +53,3 @@ const Sidebar = () => {
     </FireNav>
   )
 }
-
-export default Sidebar
