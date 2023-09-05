@@ -3,6 +3,7 @@ import { requestTypes } from '../types'
 import axios from 'axios'
 import { dataFromApi, dataToApi } from '../../helpers'
 import { tokenConfig } from '../../../utils'
+import { toast } from 'react-toastify'
 
 export const useCreateProfile = () => {
   const queryClient = useQueryClient()
@@ -18,6 +19,7 @@ export const useCreateProfile = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['profile'] })
+      toast.info('Profile updated')
     },
   })
 }

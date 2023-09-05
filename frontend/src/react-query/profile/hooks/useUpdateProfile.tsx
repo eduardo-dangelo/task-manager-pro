@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
 import { tokenConfig } from '../../../utils'
 import { dataFromApi, dataToApi } from '../../helpers'
+import { toast } from 'react-toastify'
 
 export const useUpdateProfile = () => {
   const queryClient = useQueryClient()
@@ -18,6 +19,7 @@ export const useUpdateProfile = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['profile'] })
+      toast.info('Profile updated')
     },
   })
 }
