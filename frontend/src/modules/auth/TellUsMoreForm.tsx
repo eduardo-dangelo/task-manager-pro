@@ -11,7 +11,6 @@ import useAuth, { UpdateUserFormType } from '../../hooks/useAuth'
 import LoadingButton from '@mui/lab/LoadingButton'
 import { useState } from 'react'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-import { useRouter } from 'next/router'
 
 export default function TellUsMoreForm() {
   const { isLoading, updateUser, user, loadUser, isAuthenticated } = useAuth()

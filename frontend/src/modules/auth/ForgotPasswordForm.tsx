@@ -9,10 +9,7 @@ import Typography from '@mui/material/Typography'
 import { Container, CssBaseline } from '@mui/material'
 import Copyright from '../../common/Copyright'
 import Link from 'next/link'
-import useAuth, {
-  RegisterFormType,
-  ResetPasswordRequestFormType,
-} from '../../hooks/useAuth'
+import useAuth, { ResetPasswordRequestFormType } from '../../hooks/useAuth'
 import { useState } from 'react'
 import ThumbUpIcon from '@mui/icons-material/ThumbUp'
 

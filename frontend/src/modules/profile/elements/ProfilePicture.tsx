@@ -1,5 +1,5 @@
 import React from 'react'
-import { Avatar, Badge, Box, Typography } from '@mui/material'
+import { Avatar, Badge, Box } from '@mui/material'
 import IconButton from '@mui/material/IconButton'
 import { PhotoCamera } from '@mui/icons-material'
 

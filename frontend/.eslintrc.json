@@ -1,5 +1,8 @@
 {
   "extends": "next/core-web-vitals",
+  "plugins": [
+    "unused-imports"
+  ],
   "rules": {
     "quotes": ["error", "single"],
     "semi": ["error", "never"],
@@ -8,6 +11,7 @@
     "object-curly-spacing": ["error", "always"],
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "off",
-    "unused-imports/no-unused-vars": "off"
+    "unused-imports/no-unused-vars": "off",
+    "unused-imports/no-unused-imports": "error"
   }
 }

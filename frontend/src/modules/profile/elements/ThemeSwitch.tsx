@@ -1,9 +1,7 @@
 import React from 'react'
-import { MaterialUISwitch } from '../../../common/MaterialUISwitch'
-import useAuth from '../../../hooks/useAuth'
+import { MaterialUISwitch } from '@common/MaterialUISwitch'
 import FormControlLabel from '@mui/material/FormControlLabel'
-import { useQueryClient } from '@tanstack/react-query'
-import { ThemeType } from '../../../react-query/profile'
+import { ThemeType } from '@react-query/profile'
 
 type ComponentType = {
   theme?: ThemeType
@@ -11,7 +9,6 @@ type ComponentType = {
 }
 
 export const ThemeSwitch: React.FC<ComponentType> = ({ theme, onSwitch }) => {
-  console.log('theme', theme)
   return (
     <FormControlLabel
       control={

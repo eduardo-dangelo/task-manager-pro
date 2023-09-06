@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import { ListItem } from '@mui/material'
 import { AddItemScopeTypes, ListItemType } from '../../../types'
-import { Jump, Pulse, Reveal, Fade } from '../../../animations'
+import { Pulse, Fade } from '../../../animations'
 import theme from '../../../theme'
 import { AddListItemForm } from '@common/dynamicList/elements'
 
@@ -61,7 +61,7 @@ export const AddListItem: React.FC<ComponentType> = ({
           borderRadius: 2,
           background: theme.palette.grey.A200,
           color: 'white',
-          [`& fieldset`]: {
+          ['& fieldset']: {
             borderRadius: 1.5,
             fontWeight: '100',
             boxShadow: 'inset 2px 2px 6px rgba(0,0,0,0.1)',

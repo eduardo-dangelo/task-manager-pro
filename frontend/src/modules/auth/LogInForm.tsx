@@ -11,7 +11,6 @@ import { Container, CssBaseline } from '@mui/material'
 import Copyright from '../../common/Copyright'
 import Link from 'next/link'
 import useAuth, { LoginFormType } from '../../hooks/useAuth'
-// @ts-ignore
 import LoadingButton from '@mui/lab/LoadingButton'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'

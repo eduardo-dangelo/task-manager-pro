@@ -2,11 +2,10 @@ import React, { useState } from 'react'
 import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
 import Tooltip from '@mui/material/Tooltip'
-import { Collapse, ListItem, Typography } from '@mui/material'
+import { Collapse, ListItem } from '@mui/material'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
 import { TransitionGroup } from 'react-transition-group'
-import { ListItemType, ProjectType } from '../../types'
-import { Pulse } from '../../animations'
+import { ListItemType } from '../../types'
 import theme from '../../theme'
 import {
   AddListItem,
