@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { InputAdornment, SxProps, TextField, Theme, Tooltip } from '@mui/material'
 import IconButton from '@mui/material/IconButton'
 import AddIcon from '@mui/icons-material/Add'
-import { AddItemScopeTypes } from '../../types'
-import { HeadShake } from '../../animations'
+import { AddItemScopeTypes } from '../../../types'
+import { HeadShake } from '../../../animations'
 import SaveIcon from '@mui/icons-material/Save'
 
 const rotate90IconStyle = {
@@ -35,7 +35,7 @@ type ComponentType = {
   sx?: SxProps<Theme> | undefined
 }
 
-const AddListItemForm: React.FC<ComponentType> = ({
+export const AddListItemForm: React.FC<ComponentType> = ({
   initialValue = '',
   scope,
   onCancel,
@@ -109,5 +109,3 @@ const AddListItemForm: React.FC<ComponentType> = ({
     </HeadShake>
   )
 }
-
-export default AddListItemForm

@@ -1,2 +1,2 @@
-export * from './sidebar'
+export * from './elements'
 export * from './PageLayout'

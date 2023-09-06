@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import { ListItem } from '@mui/material'
-import AddListItemForm from './AddListItemForm'
-import { AddItemScopeTypes, ListItemType } from '../../types'
-import { Jump, Pulse, Reveal, Fade } from '../../animations'
-import theme from '../../theme'
+import { AddItemScopeTypes, ListItemType } from '../../../types'
+import { Jump, Pulse, Reveal, Fade } from '../../../animations'
+import theme from '../../../theme'
+import { AddListItemForm } from '@common/dynamicList/elements'
 
 type ComponentType = {
   onAdd: (value: string) => void
@@ -17,7 +17,7 @@ type ComponentType = {
   icon?: React.ReactNode
 }
 
-const AddListItem: React.FC<ComponentType> = ({
+export const AddListItem: React.FC<ComponentType> = ({
   onAdd = () => {},
   onCancel = () => {},
   list = [],
@@ -102,5 +102,3 @@ const AddListItem: React.FC<ComponentType> = ({
     </Fade>
   )
 }
-
-export default AddListItem

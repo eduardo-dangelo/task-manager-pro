@@ -4,15 +4,15 @@ import ListItemText from '@mui/material/ListItemText'
 import ListItemButton from '@mui/material/ListItemButton'
 import { Collapse, IconButton } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
-import AddListItem from './AddListItem'
-import TrashButton from '../TrashButton'
+import TrashButton from '../../TrashButton'
 import Link from 'next/link'
-import { ListItemType } from '../../types'
-import theme from '../../theme'
+import { ListItemType } from '../../../types'
+import theme from '../../../theme'
 import { useRouter } from 'next/router'
-import { HeadShake, Jump, Pulse, Reveal, Fade } from '../../animations'
+import { HeadShake, Jump, Pulse, Reveal, Fade } from '../../../animations'
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined'
 import DescriptionIcon from '@mui/icons-material/Description'
+import { AddListItem } from '@common/dynamicList/elements'
 
 type ComponentType = {
   item: ListItemType
@@ -22,7 +22,7 @@ type ComponentType = {
   staticMode?: boolean
 }
 
-const DynamicListItem: React.FC<ComponentType> = ({
+export const DynamicListItem: React.FC<ComponentType> = ({
   item,
   list = [],
   onUpdate = () => {},
@@ -137,5 +137,3 @@ const DynamicListItem: React.FC<ComponentType> = ({
     </Link>
   )
 }
-
-export default DynamicListItem

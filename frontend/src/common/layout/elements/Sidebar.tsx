@@ -1,12 +1,12 @@
 import * as React from 'react'
 import { styled } from '@mui/material/styles'
 import List from '@mui/material/List'
-import DynamicList from '../../dynamicList/DynamicList'
 import Link from 'next/link'
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined'
 import useProjects from '../../../hooks/useProjects'
 import { Divider } from '@mui/material'
 import { UserLinks, Logo } from '@common/layout'
+import { DynamicList } from '@common/dynamicList'
 
 const FireNav = styled(List)({
   '& .MuiListItemButton-root': {

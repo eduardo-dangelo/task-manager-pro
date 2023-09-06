@@ -5,12 +5,14 @@ import Tooltip from '@mui/material/Tooltip'
 import { Collapse, ListItem, Typography } from '@mui/material'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
 import { TransitionGroup } from 'react-transition-group'
-import AddListItem from './AddListItem'
 import { ListItemType, ProjectType } from '../../types'
-import DynamicListItem from './DynamicListItem'
 import { Pulse } from '../../animations'
 import theme from '../../theme'
-import { DynamicListTitle } from './DynamicListTitle'
+import {
+  AddListItem,
+  DynamicListItem,
+  DynamicListTitle,
+} from '@common/dynamicList/elements'
 
 const rotate90IconStyle = {
   '& svg': {
@@ -38,7 +40,7 @@ type ComponentType = {
   onDelete?: (project: Partial<ListItemType>) => void
 }
 
-const DynamicList: React.FC<ComponentType> = ({
+export const DynamicList: React.FC<ComponentType> = ({
   title,
   list = [],
   staticMode = false,
@@ -136,5 +138,3 @@ const DynamicList: React.FC<ComponentType> = ({
     </Box>
   )
 }
-
-export default DynamicList
